@@ -33,28 +33,22 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Navigation: Playground + 2 Drawer Openers */}
+            {/* Navigation: Playground + Detailed Views */}
             <nav className="hidden md:flex items-center gap-6 text-xs font-mono text-slate-300">
               <a href="#playground" className="hover:text-[#10F5A0] transition-colors">
                 01. Live Playground
               </a>
               <button
                 onClick={() => setIsTelemetryOpen(true)}
-                className="hover:text-[#00F0FF] transition-colors flex items-center gap-1.5"
+                className="hover:text-[#00F0FF] transition-colors"
               >
-                <span>02. Telemetry &amp; ROI</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">
-                  Drawer
-                </span>
+                02. Telemetry &amp; ROI
               </button>
               <button
                 onClick={() => setIsArchitectureOpen(true)}
-                className="hover:text-[#10F5A0] transition-colors flex items-center gap-1.5"
+                className="hover:text-[#10F5A0] transition-colors"
               >
-                <span>03. Architecture Spec</span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#10F5A0]/10 text-[#10F5A0] border border-[#10F5A0]/30">
-                  Drawer
-                </span>
+                03. Architecture Spec
               </button>
             </nav>
 
@@ -125,13 +119,13 @@ export default function HomePage() {
                 onClick={() => setIsTelemetryOpen(true)}
                 className="hover:text-[#00F0FF] transition-colors"
               >
-                Telemetry Drawer
+                Telemetry &amp; ROI
               </button>
               <button
                 onClick={() => setIsArchitectureOpen(true)}
                 className="hover:text-[#10F5A0] transition-colors"
               >
-                Architecture Drawer
+                Architecture Spec
               </button>
               <a
                 href="https://github.com/Agent-Gauge/agent-gauge"

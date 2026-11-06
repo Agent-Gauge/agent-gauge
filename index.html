@@ -78,13 +78,11 @@
       <!-- Center navigation -->
       <nav class="hidden md:flex items-center gap-6 text-xs font-mono text-slate-300">
         <a href="#playground" class="hover:text-[#10F5A0] transition-colors">01. Live Gauge</a>
-        <button onclick="openDrawer('telemetryDrawer')" class="hover:text-[#00F0FF] transition-colors flex items-center gap-1.5">
-          <span>02. Telemetry &amp; ROI</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">Drawer</span>
+        <button onclick="openDrawer('telemetryDrawer')" class="hover:text-[#00F0FF] transition-colors">
+          02. Telemetry &amp; ROI
         </button>
-        <button onclick="openDrawer('archDrawer')" class="hover:text-[#10F5A0] transition-colors flex items-center gap-1.5">
-          <span>03. Architecture Spec</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded bg-[#10F5A0]/10 text-[#10F5A0] border border-[#10F5A0]/30">Drawer</span>
+        <button onclick="openDrawer('archDrawer')" class="hover:text-[#10F5A0] transition-colors">
+          03. Architecture Spec
         </button>
       </nav>
 
@@ -181,10 +179,7 @@
                 📊
               </div>
               <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-bold text-white">Telemetry &amp; Quota ROI</span>
-                  <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/30">Drawer</span>
-                </div>
+                <span class="text-sm font-bold text-white">Telemetry &amp; Quota ROI</span>
                 <p class="text-xs text-slate-400 mt-0.5">Empirical diff survival &amp; automated calibration</p>
               </div>
             </div>
@@ -197,10 +192,7 @@
                 🛡️
               </div>
               <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-sm font-bold text-white">Architecture &amp; Blast Shield</span>
-                  <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#10F5A0]/10 text-[#10F5A0] border border-[#10F5A0]/30">Drawer</span>
-                </div>
+                <span class="text-sm font-bold text-white">Architecture &amp; Blast Shield</span>
                 <p class="text-xs text-slate-400 mt-0.5">AST DFS pipeline &amp; token limit enforcement</p>
               </div>
             </div>

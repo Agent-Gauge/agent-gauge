@@ -453,15 +453,10 @@ export function HeroInstallHub({
                 <BarChart3 className="w-5 h-5 text-[#00F0FF]" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-white tracking-tight">
-                    Telemetry &amp; Quota ROI
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/30">
-                    Drawer
-                  </span>
-                </div>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <span class="text-sm font-bold text-white tracking-tight">
+                  Telemetry &amp; Quota ROI
+                </span>
+                <p class="text-xs text-slate-400 mt-0.5">
                   Simulate enterprise quota savings, check diff survival &amp; automated calibration rules.
                 </p>
               </div>
@@ -481,15 +476,10 @@ export function HeroInstallHub({
                 <Layers className="w-5 h-5 text-[#10F5A0]" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-white tracking-tight">
-                    Architecture &amp; Blast Shield
-                  </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10F5A0]/15 text-[#10F5A0] border border-[#10F5A0]/30">
-                    Drawer
-                  </span>
-                </div>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <span class="text-sm font-bold text-white tracking-tight">
+                  Architecture &amp; Blast Shield
+                </span>
+                <p class="text-xs text-slate-400 mt-0.5">
                   Inspect the 5-stage AST/Graph pipeline, token caps, and PR audit action setup.
                 </p>
               </div>

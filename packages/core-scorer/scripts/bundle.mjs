@@ -48,3 +48,4 @@ ${indexJs.replace(/export\s+\*\s+from\s+['"]\.\/[^'"]+['"];?\n?/g, '')}
 
 fs.writeFileSync(path.join(distDir, 'index.js'), finalBundle, 'utf8');
 console.log('Bundled @agent-gauge/core-scorer -> packages/core-scorer/dist/index.js');
+
