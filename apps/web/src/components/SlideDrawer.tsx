@@ -47,11 +47,11 @@ export function SlideDrawer({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity duration-300 animate-fadeIn"
+        className="fixed inset-0 bg-black/25 backdrop-blur-[2px] transition-opacity duration-300 animate-fadeIn"
       />
 
-      {/* Drawer Panel */}
-      <div className="relative z-10 w-full max-w-5xl h-full bg-[#020509] border-l border-[#00F0FF]/25 shadow-[-20px_0_60px_rgba(0,0,0,0.95)] flex flex-col transform transition-transform duration-300 ease-out animate-slideInRight">
+      {/* Sheet Panel */}
+      <div className="relative z-10 w-full max-w-xl sm:max-w-2xl h-full bg-[#03060a]/95 backdrop-blur-2xl border-l border-[#00F0FF]/30 shadow-[-15px_0_45px_rgba(0,0,0,0.75)] flex flex-col transform transition-transform duration-300 ease-out animate-slideInRight">
         {/* Sticky Header */}
         <div className="sticky top-0 z-20 px-6 py-4 border-b border-white/10 bg-[#020509]/95 backdrop-blur-lg flex items-center justify-between">
           <div className="flex items-center gap-3">

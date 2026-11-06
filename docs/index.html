@@ -345,17 +345,16 @@
 
   </main>
 
-  <!-- Slide-Out Drawer: Telemetry & ROI -->
+  <!-- Slide-Out Overlay: Telemetry & ROI -->
   <div id="telemetryDrawer" class="fixed inset-0 z-50 flex justify-end hidden">
-    <div onclick="closeDrawer('telemetryDrawer')" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
-    <div class="relative z-10 w-full max-w-4xl h-full bg-[#020509] border-l border-[#00F0FF]/30 shadow-[-20px_0_60px_rgba(0,0,0,0.95)] flex flex-col overflow-hidden">
-      <div class="px-6 py-4 border-b border-white/10 bg-[#020509] flex items-center justify-between shrink-0">
+    <div onclick="closeDrawer('telemetryDrawer')" class="fixed inset-0 bg-black/25 backdrop-blur-[2px] transition-opacity"></div>
+    <div class="relative z-10 w-full max-w-xl sm:max-w-2xl h-full bg-[#04080D]/95 backdrop-blur-2xl border-l border-[#00F0FF]/40 shadow-[-15px_0_45px_rgba(0,0,0,0.75)] flex flex-col overflow-hidden">
+      <div class="px-6 py-4 border-b border-white/10 bg-[#04080D]/90 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
           <span class="text-lg">📊</span>
-          <h3 class="text-base font-bold text-white">Telemetry &amp; Quota ROI Dashboard</h3>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/30">Live Simulator</span>
+          <h3 class="text-base font-bold text-white">Telemetry &amp; Quota ROI</h3>
         </div>
-        <button onclick="closeDrawer('telemetryDrawer')" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white">
+        <button onclick="closeDrawer('telemetryDrawer')" class="px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-all">
           ✕ Close
         </button>
       </div>
@@ -418,17 +417,16 @@
     </div>
   </div>
 
-  <!-- Slide-Out Drawer: Architecture & Blast Shield -->
+  <!-- Slide-Out Overlay: Architecture & Blast Shield -->
   <div id="archDrawer" class="fixed inset-0 z-50 flex justify-end hidden">
-    <div onclick="closeDrawer('archDrawer')" class="fixed inset-0 bg-black/80 backdrop-blur-md"></div>
-    <div class="relative z-10 w-full max-w-4xl h-full bg-[#020509] border-l border-[#10F5A0]/30 shadow-[-20px_0_60px_rgba(0,0,0,0.95)] flex flex-col overflow-hidden">
-      <div class="px-6 py-4 border-b border-white/10 bg-[#020509] flex items-center justify-between shrink-0">
+    <div onclick="closeDrawer('archDrawer')" class="fixed inset-0 bg-black/25 backdrop-blur-[2px] transition-opacity"></div>
+    <div class="relative z-10 w-full max-w-xl sm:max-w-2xl h-full bg-[#040A08]/95 backdrop-blur-2xl border-l border-[#10F5A0]/40 shadow-[-15px_0_45px_rgba(0,0,0,0.75)] flex flex-col overflow-hidden">
+      <div class="px-6 py-4 border-b border-white/10 bg-[#040A08]/90 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
           <span class="text-lg">🛡️</span>
-          <h3 class="text-base font-bold text-white">Architecture &amp; Blast Shield Specification</h3>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10F5A0]/15 text-[#10F5A0] border border-[#10F5A0]/30">v1.0 Spec</span>
+          <h3 class="text-base font-bold text-white">Architecture &amp; Blast Shield</h3>
         </div>
-        <button onclick="closeDrawer('archDrawer')" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white">
+        <button onclick="closeDrawer('archDrawer')" class="px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-all">
           ✕ Close
         </button>
       </div>
