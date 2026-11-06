@@ -27,6 +27,9 @@ describe('@agent-gauge/core-scorer deterministic engine', () => {
     assert.equal(result.executionMode, 'direct');
     assert.ok(result.savings.costSavedPct >= 90, `Expected >=90% savings, got ${result.savings.costSavedPct}%`);
     assert.ok(result.latencyMs < 15, `Expected <15ms routing latency, got ${result.latencyMs}ms`);
+    assert.equal(result.contextBudget.maxPromptTokensRecommended, 4000);
+    assert.equal(result.contextBudget.maxFilesToInject, 2);
+    assert.equal(result.regretAlert.isHighRisk, false);
   });
 
   it('routes critical Postgres billing race condition tasks to DEEP + HIGH effort + plan-first', () => {

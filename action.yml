@@ -1,0 +1,53 @@
+name: 'AgentGauge PR AI Cost & Complexity Audit'
+description: 'Deterministic <15ms coding task complexity, blast-radius, and AI token quota savings audit on every Pull Request.'
+author: 'Agent-Gauge'
+branding:
+  icon: 'zap'
+  color: 'purple'
+
+inputs:
+  github-token:
+    description: 'GitHub token for posting PR comments'
+    required: false
+    default: ${{ github.token }}
+  base-ref:
+    description: 'Base branch or git ref to compare against (defaults to origin/main or github.base_ref)'
+    required: false
+    default: 'origin/main'
+  output-file:
+    description: 'Path where the markdown PR comment report should be written'
+    required: false
+    default: 'agent-gauge-pr-audit.md'
+
+outputs:
+  complexity-score:
+    description: 'Total deterministic complexity score (0-100)'
+    value: ${{ steps.audit.outputs.score }}
+  model-tier:
+    description: 'Recommended model tier (fast, balanced, or deep)'
+    value: ${{ steps.audit.outputs.tier }}
+  cost-saved-pct:
+    description: 'Percentage of AI model API cost saved vs Opus High'
+    value: ${{ steps.audit.outputs.savings }}
+  markdown-report:
+    description: 'Full markdown audit summary'
+    value: ${{ steps.audit.outputs.report }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Run AgentGauge PR Audit
+      id: audit
+      shell: bash
+      run: |
+        node ${{ github.action_path }}/packages/mcp-server/src/cli.ts pr-audit --base "${{ inputs.base-ref }}" --out "${{ inputs.output-file }}"
+        
+        # Post PR comment if running inside a pull_request event and token is available
+        if [ -n "${{ inputs.github-token }}" ] && [ "${{ github.event_name }}" = "pull_request" ]; then
+          gh pr comment ${{ github.event.pull_request.number }} --body-file "${{ inputs.output-file }}" || true
+        fi

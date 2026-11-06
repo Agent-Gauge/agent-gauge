@@ -27,7 +27,16 @@
 
 ---
 
-## 4 Distribution Channels from 1 Monorepo
+## Key Capabilities
+
+- **⚡ Deterministic Pre-Flight Routing (<15ms):** Scores task intent, blast radius, structural complexity, and repo risk to select the optimal model (Flash vs Sonnet vs Opus) and effort tier with **zero LLM API cost**.
+- **🛡️ Context Window Blast Shield:** Automatically calculates a recommended token & file budget (e.g. 4k tokens / 2 files on `fast` tier) to prevent amnesia and stop agents from blindly polluting context with unneeded dependency trees.
+- **⚠️ Historical Regret Sentry:** Uses empirical git diff survival telemetry from `~/.agent-gauge/telemetry.db`. If an agent touches a file where past edits were reverted (>20%), it flags a high-regret warning and enforces plan/test verification.
+- **🏷️ Automated GitHub Action PR Audit:** Analyzes pull request diffs and comments an instant AI complexity, quota savings, and regression risk badge directly on the PR.
+
+---
+
+## 5 Distribution Channels from 1 Monorepo
 
 1. **`skills.sh` Multi-Agent Skill:**
    ```bash
@@ -35,9 +44,33 @@
    ```
    Powered by root [`SKILL.md`](./SKILL.md) + [`agents/router-agent.md`](./agents/router-agent.md), [`agents/calibration-agent.md`](./agents/calibration-agent.md), and [`agents/report-agent.md`](./agents/report-agent.md).
 
-2. **MCP Server & CLI (`packages/mcp-server`):**
+2. **GitHub Action PR AI Cost & Risk Badge (`action.yml`):**
+   Add this 10-line workflow to `.github/workflows/agent-gauge.yml` in **any** repo:
+   ```yaml
+   name: AgentGauge PR Audit
+   on: [pull_request]
+   jobs:
+     audit:
+       runs-on: ubuntu-latest
+       permissions:
+         pull-requests: write
+       steps:
+         - uses: actions/checkout@v4
+           with:
+             fetch-depth: 0
+         - uses: Agent-Gauge/agent-gauge@main
+           with:
+             github-token: ${{ secrets.GITHUB_TOKEN }}
+   ```
+   Or run it locally from your CLI:
+   ```bash
+   npx agent-gauge pr-audit --base origin/main
+   ```
+
+3. **MCP Server & CLI (`packages/mcp-server`):**
    ```bash
    npx agent-gauge score "Fix Postgres billing race condition" --files src/ledger.ts
+   npx agent-gauge pr-audit
    npx agent-gauge report --out report.json
    ```
    Or add to `~/.cursor/mcp.json` / `claude_desktop_config.json`:
@@ -52,11 +85,11 @@
    }
    ```
 
-3. **VS Code / Cursor / Antigravity / Windsurf Extension (`packages/vscode-ext`):**
-   Displays a live status-bar pill (`⚡ Gauge: Sonnet · Med (Score 48)`) and a quick-pick 4-dimension breakdown.
+4. **VS Code / Cursor / Antigravity / Windsurf Extension (`packages/vscode-ext`):**
+   Displays a live status-bar pill (`⚡ Gauge: Sonnet · Med (Score 48)`), context shield budget, and a quick-pick 4-dimension breakdown.
 
-4. **Next.js 15 Interactive Showcase & Telemetry Visualizer (`apps/web`):**
-   Configured for **GitHub Pages** (`output: 'export'` via [`.github/workflows/deploy-pages.yml`](./.github/workflows/deploy-pages.yml)) as well as Vercel. Imports `@agent-gauge/core-scorer` live in the browser for real-time scoring and includes a 100% client-side `report.json` drag-and-drop dashboard.
+5. **Next.js 15 Interactive Showcase & Telemetry Visualizer (`apps/web`):**
+   Configured for **GitHub Pages** as well as Vercel. Imports `@agent-gauge/core-scorer` live in the browser for real-time scoring and includes a 100% client-side `report.json` drag-and-drop dashboard.
 
 ---
 

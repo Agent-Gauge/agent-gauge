@@ -84,14 +84,21 @@ export function activate(context: VsCodeExtensionContext, vscodeApi?: VsCodeApi)
   statusBar.command = 'agentGauge.showBreakdown';
 
   const refreshStatusBar = (result: TaskScoreResult) => {
-    statusBar.text = result.statusBarLabel;
-    statusBar.tooltip = [
+    statusBar.text = result.regretAlert.isHighRisk
+      ? `⚠️ ${result.statusBarLabel}`
+      : result.statusBarLabel;
+    const lines = [
       `⚡ AgentGauge Deterministic Pre-Flight Router (${result.latencyMs}ms)`,
       `• Recommended Model: ${result.primaryModel} (Alt: ${result.alternateModel})`,
       `• Effort Level: ${result.recommendedEffort.toUpperCase()} | Mode: ${result.executionMode}`,
+      `• Context Shield: Max ${result.contextBudget.maxPromptTokensRecommended} tokens (≤${result.contextBudget.maxFilesToInject} files)`,
       `• Breakdown: Intent ${result.breakdown.intent.score}/35 · Blast ${result.breakdown.blastRadius.score}/30 · Struct ${result.breakdown.structural.score}/20 · RepoRisk ${result.breakdown.repoRisk.score}/15`,
       `• Savings vs Opus High: ${result.savings.costSavedPct}% ($${result.savings.recommendedCostUsd} vs $${result.savings.baselineDeepHighCostUsd})`,
-    ].join('\n');
+    ];
+    if (result.regretAlert.isHighRisk && result.regretAlert.warning) {
+      lines.push(`• ${result.regretAlert.warning}`);
+    }
+    statusBar.tooltip = lines.join('\n');
     statusBar.show();
   };
 
@@ -145,6 +152,20 @@ export function activate(context: VsCodeExtensionContext, vscodeApi?: VsCodeApi)
         description: `Empirical revert rate: ${(r.breakdown.repoRisk.effectiveRevertRate * 100).toFixed(1)}%`,
         detail: r.breakdown.repoRisk.summary,
       },
+      {
+        label: `$(shield) 5. Context Window Blast Shield: Max ${r.contextBudget.maxPromptTokensRecommended} tokens`,
+        description: `Budget: ≤ ${r.contextBudget.maxFilesToInject} files`,
+        detail: r.contextBudget.guideline,
+      },
+      ...(r.regretAlert.isHighRisk
+        ? [
+            {
+              label: `$(warning) Sentry: High Regret Alert (${r.regretAlert.historicalRevertRatePct}% revert rate)`,
+              description: 'Mandatory verification advised',
+              detail: r.regretAlert.warning || '',
+            },
+          ]
+        : []),
       {
         label: `$(edit) Score a New Task Prompt...`,
         description: 'Run AgentGauge pre-flight scorer on a custom prompt',

@@ -43,6 +43,24 @@ export interface ScoreBreakdown {
   };
 }
 
+export interface ContextBudget {
+  /** Maximum recommended prompt tokens injected into context for this task tier */
+  maxPromptTokensRecommended: number;
+  /** Maximum number of related files an agent should pull into context */
+  maxFilesToInject: number;
+  /** Operational directive to prevent amnesia and context pollution */
+  guideline: string;
+}
+
+export interface RegretAlert {
+  /** True when historical revert rate on target paths exceeds safe threshold (>= 20%) */
+  isHighRisk: boolean;
+  /** Empirical historical revert percentage (0-100) */
+  historicalRevertRatePct: number;
+  /** Actionable warning message for the developer or agent */
+  warning?: string;
+}
+
 export interface TaskScoreResult {
   totalScore: number; // 0 to 100
   taskCategory: TaskCategory;
@@ -56,6 +74,8 @@ export interface TaskScoreResult {
   latencyMs: number;
   breakdown: ScoreBreakdown;
   savings: SavingsEstimate;
+  contextBudget: ContextBudget;
+  regretAlert: RegretAlert;
 }
 
 const STRUCTURAL_INDICATORS: Array<{ label: string; weight: number; pattern: RegExp }> = [
@@ -267,6 +287,40 @@ export function scoreTask(input: ScoreTaskInput): TaskScoreResult {
 
   const rationale = `Score ${totalScore}/100 [Intent ${intent.score}/35 (${intent.category}), Blast ${blastRadius.score}/30 (${blastRadius.filesTouched} files, ${blastRadius.downstreamFanOut} fan-out), Struct ${structural.score}/20, RepoRisk ${repoRisk.score}/15] → Route to ${models.primary} (${recommendedEffort.toUpperCase()} effort, ${executionMode}) saving ${savings.costSavedPct}% vs Opus High.`;
 
+  // 1. Context Window Blast Shield Budget
+  const contextBudget: ContextBudget =
+    recommendedTier === 'fast'
+      ? {
+          maxPromptTokensRecommended: 4000,
+          maxFilesToInject: 2,
+          guideline:
+            'Blast Shield Active: Restrict context strictly to target files. Block reading wide dependencies or schema graphs to prevent token bloat.',
+        }
+      : recommendedTier === 'balanced'
+      ? {
+          maxPromptTokensRecommended: 16000,
+          maxFilesToInject: 5,
+          guideline:
+            'Standard Context: Inject direct target files plus immediate imports/types only.',
+        }
+      : {
+          maxPromptTokensRecommended: 64000,
+          maxFilesToInject: 15,
+          guideline:
+            'Deep Context: Full dependency inspection authorized for concurrency and invariant verification.',
+        };
+
+  // 2. Empirical Regret Alert (High-Risk Revert Sentry)
+  const isHighRisk = repoRisk.effectiveRevertRate >= 0.2 || repoRisk.score >= 10;
+  const revertPct = Math.round(repoRisk.effectiveRevertRate * 100);
+  const regretAlert: RegretAlert = {
+    isHighRisk,
+    historicalRevertRatePct: revertPct,
+    warning: isHighRisk
+      ? `⚠️ High Regret Risk (${revertPct}% empirical revert rate). Previous agent edits on these paths required rework or were reverted. Enforce test run before commit.`
+      : undefined,
+  };
+
   const endTime = typeof performance !== 'undefined' ? performance.now() : Date.now();
   const latencyMs = Number(Math.max(0.05, endTime - startTime).toFixed(2));
 
@@ -288,5 +342,7 @@ export function scoreTask(input: ScoreTaskInput): TaskScoreResult {
       repoRisk,
     },
     savings,
+    contextBudget,
+    regretAlert,
   };
 }
