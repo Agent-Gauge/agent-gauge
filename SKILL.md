@@ -1,6 +1,6 @@
 ---
 name: agent-gauge
-description: Deterministic <15ms pre-flight task router and closed-loop git diff survival telemetry engine. Activate before starting coding tasks to select the optimal (Agent Execution Mode + Model Tier + Effort Level: Low/Medium/High), when auditing git diff survival after edits, or when generating a repository ROI & quota savings report.
+description: "Deterministic <15ms pre-flight task router and closed-loop git diff survival telemetry engine. Activate before starting coding tasks to select the optimal Agent Execution Mode, Model Tier, and Effort Level (Low, Medium, or High), when auditing git diff survival after edits, or when generating a repository ROI and quota savings report."
 ---
 
 # ⚡ AgentGauge (`agent-gauge`)

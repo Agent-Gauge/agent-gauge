@@ -42,6 +42,7 @@ export interface VsCodeApi {
   };
   commands: {
     registerCommand(command: string, callback: (...args: unknown[]) => unknown): { dispose(): void };
+    executeCommand?(command: string, ...rest: unknown[]): Promise<unknown>;
   };
 }
 
@@ -157,7 +158,9 @@ export function activate(context: VsCodeExtensionContext, vscodeApi?: VsCodeApi)
     });
 
     if (picked && picked.label.includes('Score a New Task Prompt')) {
-      await vscode!.commands.registerCommand('agentGauge.scorePrompt', () => {});
+      if (vscode!.commands.executeCommand) {
+        await vscode!.commands.executeCommand('agentGauge.scorePrompt');
+      }
     }
   });
 
