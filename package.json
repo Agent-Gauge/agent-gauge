@@ -1,0 +1,34 @@
+{
+  "name": "agent-gauge-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Deterministic <15ms coding task router (Agent Mode + Model Tier + Effort Level) with closed-loop git diff survival learning.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm --filter @agent-gauge/core-scorer test",
+    "dev": "pnpm --filter @agent-gauge/web dev",
+    "score": "node packages/mcp-server/dist/cli.js score",
+    "report": "node packages/mcp-server/dist/cli.js report"
+  },
+  "keywords": [
+    "mcp",
+    "agent-skills",
+    "llm-router",
+    "model-routing",
+    "effort-level",
+    "cursor",
+    "claude-code",
+    "antigravity",
+    "telemetry"
+  ],
+  "author": "AgentGauge Contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
+
