@@ -1,0 +1,1 @@
+{"service":"agent-gauge-static-stats","version":"1.0.0","communityStats":{"totalCommunityTurnsRouted":148920,"avgQuotaSavedPct":64.2,"avgFirstPassDiffSurvivalPct":94.6,"avgDeterministicLatencyMs":1.24}}
