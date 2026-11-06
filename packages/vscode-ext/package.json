@@ -3,6 +3,7 @@
   "displayName": "AgentGauge — Model & Effort Router",
   "description": "Live status-bar task complexity scorer (<15ms) that routes coding tasks to the optimal Agent Mode + Model Tier + Effort Level (Low/Med/High).",
   "version": "1.0.0",
+  "icon": "icon.png",
   "publisher": "haripriyarao26",
   "repository": {
     "type": "git",
