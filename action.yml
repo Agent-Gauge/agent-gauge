@@ -51,3 +51,4 @@ runs:
         if [ -n "${{ inputs.github-token }}" ] && [ "${{ github.event_name }}" = "pull_request" ]; then
           gh pr comment ${{ github.event.pull_request.number }} --body-file "${{ inputs.output-file }}" || true
         fi
+
