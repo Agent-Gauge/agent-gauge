@@ -1,0 +1,190 @@
+{
+  "generatedAt": "2026-11-06T14:40:00.000Z",
+  "repoId": "agent-gauge/production-monorepo",
+  "totalTurns": 420,
+  "quotaSavedPct": 62.4,
+  "totalSavedUsd": 261.12,
+  "actualSpendUsd": 46.32,
+  "baselineDeepHighUsd": 307.44,
+  "firstPassSurvivalPct": 94.2,
+  "regretEscalationRatePct": 1.9,
+  "avgRoutingLatencyMs": 1.42,
+  "tierDistribution": {
+    "fast": {
+      "turns": 200,
+      "pct": 47.6,
+      "survivalPct": 96.5,
+      "avgScore": 15
+    },
+    "balanced": {
+      "turns": 172,
+      "pct": 41.0,
+      "survivalPct": 91.9,
+      "avgScore": 48
+    },
+    "deep": {
+      "turns": 48,
+      "pct": 11.4,
+      "survivalPct": 93.8,
+      "avgScore": 83
+    }
+  },
+  "categoryBreakdown": [
+    {
+      "category": "ui",
+      "turns": 142,
+      "avgScore": 16,
+      "dominantTier": "fast",
+      "survivalPct": 97.2,
+      "savedUsd": 103.38
+    },
+    {
+      "category": "refactor",
+      "turns": 118,
+      "avgScore": 49,
+      "dominantTier": "balanced",
+      "survivalPct": 93.2,
+      "savedUsd": 73.63
+    },
+    {
+      "category": "docs",
+      "turns": 58,
+      "avgScore": 11,
+      "dominantTier": "fast",
+      "survivalPct": 98.3,
+      "savedUsd": 41.24
+    },
+    {
+      "category": "scaffold",
+      "turns": 46,
+      "avgScore": 42,
+      "dominantTier": "balanced",
+      "survivalPct": 93.5,
+      "savedUsd": 30.36
+    },
+    {
+      "category": "concurrency-debug",
+      "turns": 34,
+      "avgScore": 84,
+      "dominantTier": "deep",
+      "survivalPct": 91.2,
+      "savedUsd": 4.85
+    },
+    {
+      "category": "multi-agent",
+      "turns": 14,
+      "avgScore": 79,
+      "dominantTier": "deep",
+      "survivalPct": 92.9,
+      "savedUsd": 7.52
+    },
+    {
+      "category": "security-auth",
+      "turns": 8,
+      "avgScore": 64,
+      "dominantTier": "balanced",
+      "survivalPct": 75.0,
+      "savedUsd": 0.14
+    }
+  ],
+  "calibratedPolicy": {
+    "fastMaxScore": 31,
+    "balancedMaxScore": 64,
+    "learnedRules": [
+      {
+        "pattern": "packages/auth/src/pkce-lock.ts",
+        "revertRatePct": 28.0,
+        "policyAction": "Auto-escalate minimum tier to Deep + High Effort"
+      },
+      {
+        "pattern": "packages/billing/src/ledger.ts",
+        "revertRatePct": 19.0,
+        "policyAction": "Enforce Balanced + High Effort & Pre-Flight Plan"
+      },
+      {
+        "pattern": "packages/orchestrator/src/checkpoint.ts",
+        "revertRatePct": 14.0,
+        "policyAction": "Enforce Balanced + Medium Effort & Pre-Flight Plan"
+      },
+      {
+        "pattern": "apps/web/src/components/",
+        "revertRatePct": 1.4,
+        "policyAction": "Allow Fast Tier (97.2% first-pass diff survival)"
+      }
+    ]
+  },
+  "recentTurns": [
+    {
+      "runId": "run-0420",
+      "timestamp": "2026-11-06T14:22:00.000Z",
+      "promptSummary": "Fix Postgres ledger double-spend race condition under concurrent webhook retries",
+      "category": "concurrency-debug",
+      "score": 86,
+      "routedTo": "Claude 4.6 Opus",
+      "effort": "high",
+      "survived": true,
+      "revertedRatio": 0.0,
+      "savedUsd": 0.0
+    },
+    {
+      "runId": "run-0419",
+      "timestamp": "2026-11-06T13:50:00.000Z",
+      "promptSummary": "Debug LangGraph cyclic state checkpoint deserialization on subagent handoff",
+      "category": "multi-agent",
+      "score": 79,
+      "routedTo": "Gemini 3.1 Pro",
+      "effort": "high",
+      "survived": true,
+      "revertedRatio": 0.03,
+      "savedUsd": 0.537
+    },
+    {
+      "runId": "run-0418",
+      "timestamp": "2026-11-06T13:15:00.000Z",
+      "promptSummary": "Modify OAuth2 PKCE token refresh lock across edge middleware",
+      "category": "security-auth",
+      "score": 64,
+      "routedTo": "Claude 4.6 Sonnet",
+      "effort": "medium",
+      "survived": false,
+      "revertedRatio": 0.78,
+      "savedUsd": 0.624
+    },
+    {
+      "runId": "run-0417",
+      "timestamp": "2026-11-06T12:40:00.000Z",
+      "promptSummary": "Write Golden Dataset eval runner CLI with retry backoff and JSON output",
+      "category": "testing",
+      "score": 48,
+      "routedTo": "Claude 4.6 Sonnet",
+      "effort": "medium",
+      "survived": true,
+      "revertedRatio": 0.02,
+      "savedUsd": 0.624
+    },
+    {
+      "runId": "run-0416",
+      "timestamp": "2026-11-06T12:05:00.000Z",
+      "promptSummary": "Extract Figma spacing and border-radius tokens to Storybook showcase",
+      "category": "ui",
+      "score": 34,
+      "routedTo": "Gemini 4 Argon",
+      "effort": "low",
+      "survived": true,
+      "revertedRatio": 0.0,
+      "savedUsd": 0.676
+    },
+    {
+      "runId": "run-0415",
+      "timestamp": "2026-11-06T11:30:00.000Z",
+      "promptSummary": "Add Tailwind dark-mode background and muted text classes to footer",
+      "category": "ui",
+      "score": 12,
+      "routedTo": "Gemini 3.1 Flash",
+      "effort": "low",
+      "survived": true,
+      "revertedRatio": 0.0,
+      "savedUsd": 0.728
+    }
+  ]
+}
