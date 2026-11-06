@@ -43,7 +43,7 @@ const INSTALL_CHANNELS: ChannelConfig[] = [
     id: 'skills',
     label: 'skills.sh',
     badge: '1-Command Skill',
-    command: 'npx skills add haripriyarao26/agent-gauge',
+    command: 'npx skills add Agent-Gauge/agent-gauge',
     description:
       'Installs root SKILL.md + router, calibration, ROI report, and UI/UX Pro Max subagents into Claude Code, Antigravity, Cursor, and Windsurf.',
   },

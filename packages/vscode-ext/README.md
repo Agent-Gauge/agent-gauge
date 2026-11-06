@@ -13,3 +13,4 @@
   3. **Structural Complexity (`0–20 pts`):** Cyclomatic control flow, locks, SQL transactions, AST patterns.
   4. **Historical Repo Risk (`0–15 pts`):** Bayesian-smoothed empirical git diff revert rate.
 - **Custom Prompt Pre-Flight Check:** Run `AgentGauge: Score Coding Task & Recommend Model/Effort` from the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) to score any prompt before starting an agent turn.
+

@@ -4,10 +4,10 @@
   "description": "Live status-bar task complexity scorer (<15ms) that routes coding tasks to the optimal Agent Mode + Model Tier + Effort Level (Low/Med/High).",
   "version": "1.0.0",
   "icon": "icon.png",
-  "publisher": "haripriyarao26",
+  "publisher": "agent-gauge",
   "repository": {
     "type": "git",
-    "url": "https://github.com/haripriyarao26/agent-gauge.git"
+    "url": "https://github.com/Agent-Gauge/agent-gauge.git"
   },
   "engines": {
     "vscode": "^1.90.0"

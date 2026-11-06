@@ -11,13 +11,13 @@
 **AgentGauge** is an open-source, deterministic `<15ms` Agent Skill, MCP Server, VS Code Status-Bar Extension, and Next.js 15 Telemetry Visualizer that routes coding tasks to the optimal **(Agent Execution Mode + Model Tier + Effort Level: Low / Medium / High)** and learns from real **git diff survival** outcomes.
 
 <p align="center">
-  <a href="https://haripriyarao26.github.io/agent-gauge/"><strong>🚀 Launch Live Interactive Playground &amp; 3D Telemetry Demo (GitHub Pages) →</strong></a>
+  <a href="https://agent-gauge.github.io/agent-gauge/"><strong>🚀 Launch Live Interactive Playground &amp; 3D Telemetry Demo (GitHub Pages) →</strong></a>
   &nbsp;&middot;&nbsp;
-  <a href="./.github/workflows/deploy-pages.yml"><code>.github/workflows/deploy-pages.yml</code></a>
+  <a href="https://github.com/Agent-Gauge/agent-gauge"><code>Agent-Gauge/agent-gauge</code></a>
 </p>
 
 <p align="center">
-  <a href="https://haripriyarao26.github.io/agent-gauge/">
+  <a href="https://agent-gauge.github.io/agent-gauge/">
     <img src="./docs/agent-gauge-demo.gif" alt="AgentGauge <15ms 4-Dimension Router flipping from Haiku/Flash Low (Score 14) to Sonnet Med (Score 48) to Opus/Pro High (Score 92)" width="100%" />
   </a>
 </p>
@@ -31,7 +31,7 @@
 
 1. **`skills.sh` Multi-Agent Skill:**
    ```bash
-   npx skills add haripriyarao26/agent-gauge
+   npx skills add Agent-Gauge/agent-gauge
    ```
    Powered by root [`SKILL.md`](./SKILL.md) + [`agents/router-agent.md`](./agents/router-agent.md), [`agents/calibration-agent.md`](./agents/calibration-agent.md), and [`agents/report-agent.md`](./agents/report-agent.md).
 

@@ -50,7 +50,7 @@ export default function HomePage() {
                 &lt;15ms Scorer
               </a>
               <a
-                href="https://github.com/haripriyarao26/agent-gauge"
+                href="https://github.com/Agent-Gauge/agent-gauge"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#7C5CFF] to-[#5B3DF5] hover:opacity-95 text-xs font-semibold text-white shadow-[0_0_15px_rgba(124,92,255,0.35)] transition-all"
