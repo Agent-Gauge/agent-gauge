@@ -200,7 +200,7 @@ export function TelemetryDashboard() {
             <MagnetButton
               strength={0.2}
               onClick={downloadSampleJson}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl layers-glass hover:border-[#7C5CFF]/60 text-xs font-mono text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl layers-glass hover:border-[#00F0FF]/60 text-xs font-mono text-white transition-colors"
             >
               <Download className="w-3.5 h-3.5 text-[#00F0FF]" />
               Download report.json
@@ -222,7 +222,7 @@ export function TelemetryDashboard() {
               ? 'border-[#00F0FF] bg-[#00F0FF]/10'
               : isCustomLoaded
                 ? 'border-[#10F5A0]/50 bg-[#10F5A0]/5'
-                : 'border-white/15 hover:border-[#7C5CFF]/60 layers-glass'
+                : 'border-white/15 hover:border-[#00F0FF]/60 layers-glass'
           }`}
         >
           <input
@@ -233,11 +233,11 @@ export function TelemetryDashboard() {
             className="hidden"
           />
           <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-[#7C5CFF]/20 border border-[#7C5CFF]/40 flex items-center justify-center text-[#00F0FF] shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-[#00F0FF]/15 border border-[#00F0FF]/35 flex items-center justify-center text-[#00F0FF] shrink-0">
               {isCustomLoaded ? (
                 <Check className="w-5 h-5 text-[#10F5A0]" />
               ) : (
-                <UploadCloud className="w-5 h-5" />
+                <UploadCloud className="w-5 h-5 text-[#00F0FF]" />
               )}
             </div>
             <div>
@@ -253,7 +253,7 @@ export function TelemetryDashboard() {
               </div>
             </div>
           </div>
-          <span className="px-4 py-2 rounded-xl bg-[#7C5CFF]/25 border border-[#7C5CFF]/50 text-xs font-mono font-semibold text-white shrink-0">
+          <span className="px-4 py-2 rounded-xl bg-[#00F0FF]/15 border border-[#00F0FF]/40 text-xs font-mono font-semibold text-[#00F0FF] shrink-0">
             Browse report.json
           </span>
         </div>
@@ -339,22 +339,22 @@ export function TelemetryDashboard() {
                     {
                       key: 'balanced',
                       label: 'Balanced Tier (Sonnet / Argon)',
-                      color: 'bg-[#7C5CFF]',
-                      text: 'text-[#c4b5fd]',
+                      color: 'bg-[#00F0FF]',
+                      text: 'text-[#00F0FF]',
                       data: report.tierDistribution.balanced,
                     },
                     {
                       key: 'deep',
                       label: 'Deep Tier (Opus / Pro High)',
-                      color: 'bg-[#FF9E2C]',
-                      text: 'text-[#FF9E2C]',
+                      color: 'bg-white',
+                      text: 'text-white',
                       data: report.tierDistribution.deep,
                     },
                   ] as const
                 ).map((item) => (
                   <div
                     key={item.key}
-                    className="p-3.5 rounded-xl bg-[#040509]/90 border border-white/10"
+                    className="p-3.5 rounded-xl bg-[#000000] border border-white/10"
                   >
                     <div className="flex items-center justify-between text-xs mb-1.5">
                       <span className="font-semibold text-white">{item.label}</span>
@@ -409,8 +409,8 @@ export function TelemetryDashboard() {
                     cat.dominantTier === 'fast'
                       ? 'from-[#10F5A0] to-[#00F0FF]'
                       : cat.dominantTier === 'balanced'
-                        ? 'from-[#7C5CFF] to-[#00F0FF]'
-                        : 'from-[#FF9E2C] to-[#7C5CFF]';
+                        ? 'from-[#00F0FF] to-[#10F5A0]'
+                        : 'from-[#00F0FF] to-white';
 
                   return (
                     <div
@@ -419,8 +419,8 @@ export function TelemetryDashboard() {
                       onMouseLeave={() => setActiveCategory(null)}
                       className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                         isHovered
-                          ? 'bg-[#7C5CFF]/15 border-[#00F0FF]/50 translate-x-1'
-                          : 'bg-[#040509]/80 border-white/10'
+                          ? 'bg-[#00F0FF]/15 border-[#00F0FF]/50 translate-x-1'
+                          : 'bg-[#000000] border-white/10'
                       }`}
                     >
                       <div className="flex items-center justify-between text-xs font-mono mb-1.5">
@@ -450,21 +450,21 @@ export function TelemetryDashboard() {
 
               {/* Learned Repository Calibration Rules */}
               <div className="pt-4 border-t border-white/10">
-                <div className="text-xs font-mono uppercase tracking-wider text-[#FF9E2C] mb-2.5 flex items-center gap-1.5">
-                  <ShieldAlert className="w-4 h-4" />
+                <div className="text-xs font-mono uppercase tracking-wider text-[#00F0FF] mb-2.5 flex items-center gap-1.5">
+                  <ShieldAlert className="w-4 h-4 text-[#10F5A0]" />
                   Learned Path-Specific Escalation Rules
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {report.calibratedPolicy.learnedRules.map((rule) => (
                     <div
                       key={rule.pattern}
-                      className="p-3 rounded-xl bg-[#040509]/90 border border-white/10 flex flex-col justify-between"
+                      className="p-3 rounded-xl bg-[#000000] border border-white/10 flex flex-col justify-between"
                     >
                       <div className="flex items-center justify-between gap-2 mb-1">
                         <span className="font-mono text-xs text-[#00F0FF] truncate">
                           {rule.pattern}
                         </span>
-                        <span className="font-mono text-[11px] font-bold text-[#FF9E2C] shrink-0">
+                        <span className="font-mono text-[11px] font-bold text-[#10F5A0] shrink-0">
                           {rule.revertRatePct}% revert
                         </span>
                       </div>
@@ -497,7 +497,7 @@ export function TelemetryDashboard() {
               >
                 <div>
                   <div className="flex items-center justify-between text-xs font-mono mb-2">
-                    <span className="text-[#7C5CFF] font-bold">{t.runId}</span>
+                    <span className="text-[#00F0FF] font-bold">{t.runId}</span>
                     <span className="px-2 py-0.5 rounded bg-white/10 text-white font-bold">
                       Score {t.score}/100
                     </span>
@@ -510,7 +510,7 @@ export function TelemetryDashboard() {
                 <div className="pt-3 border-t border-white/10 space-y-2 text-xs font-mono">
                   <div className="flex items-center justify-between">
                     <span className="text-slate-400">{t.routedTo}</span>
-                    <span className="uppercase text-[10px] px-2 py-0.5 rounded bg-[#7C5CFF]/20 text-[#c4b5fd]">
+                    <span className="uppercase text-[10px] px-2 py-0.5 rounded bg-[#00F0FF]/20 text-[#00F0FF]">
                       {t.effort} effort
                     </span>
                   </div>

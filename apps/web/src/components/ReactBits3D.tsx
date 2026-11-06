@@ -57,10 +57,10 @@ export function LenisSmoothScrollProvider({ children }: { children: React.ReactN
 
   return (
     <div className="relative min-h-screen">
-      {/* Top GetLayers.ai Neon Scroll Progress Bar */}
+      {/* Top Neon Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-[2.5px] z-[100] bg-transparent pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-[#7C5CFF] via-[#00F0FF] to-[#10F5A0] shadow-[0_0_14px_#00F0FF]"
+          className="h-full bg-gradient-to-r from-[#10F5A0] via-[#00F0FF] to-[#10F5A0] shadow-[0_0_16px_#00F0FF]"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
@@ -71,7 +71,7 @@ export function LenisSmoothScrollProvider({ children }: { children: React.ReactN
         className="pointer-events-none fixed top-0 left-0 w-[440px] h-[440px] rounded-full opacity-20 blur-[90px] z-0"
         style={{
           background:
-            'radial-gradient(circle, rgba(124,92,255,0.45) 0%, rgba(0,240,255,0.22) 45%, transparent 70%)',
+            'radial-gradient(circle, rgba(16,245,160,0.40) 0%, rgba(0,240,255,0.22) 45%, transparent 70%)',
         }}
       />
 
@@ -94,7 +94,7 @@ export interface Tilt3DSpotlightCardProps {
 export function Tilt3DSpotlightCard({
   children,
   className = '',
-  accentColor = 'rgba(124, 92, 255, 0.28)',
+  accentColor = 'rgba(16, 245, 160, 0.28)',
   maxTiltDeg = 6,
   onClick,
 }: Tilt3DSpotlightCardProps) {
@@ -318,10 +318,10 @@ export function Neural3DPrismCanvas({
 
     const palette =
       tier === 'fast'
-        ? { primary: '#10F5A0', secondary: '#00F0FF', glow: 'rgba(16, 245, 160, 0.35)' }
+        ? { primary: '#10F5A0', secondary: '#00F0FF', glow: 'rgba(16, 245, 160, 0.45)' }
         : tier === 'deep'
-          ? { primary: '#FF9E2C', secondary: '#7C5CFF', glow: 'rgba(255, 158, 44, 0.38)' }
-          : { primary: '#7C5CFF', secondary: '#00F0FF', glow: 'rgba(124, 92, 255, 0.38)' };
+          ? { primary: '#00F0FF', secondary: '#10F5A0', glow: 'rgba(0, 240, 255, 0.45)' }
+          : { primary: '#10F5A0', secondary: '#00F0FF', glow: 'rgba(16, 245, 160, 0.45)' };
 
     // Golden ratio icosahedron vertices in 3D space
     const phi = (1 + Math.sqrt(5)) / 2;

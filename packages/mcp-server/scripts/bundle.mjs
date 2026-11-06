@@ -94,3 +94,4 @@ fs.writeFileSync(cliOut, cliBundle, { encoding: 'utf8', mode: 0o755 });
 
 console.log(`Bundled standalone MCP server -> ${path.relative(process.cwd(), indexOut)}`);
 console.log(`Bundled standalone CLI tool   -> ${path.relative(process.cwd(), cliOut)}`);
+

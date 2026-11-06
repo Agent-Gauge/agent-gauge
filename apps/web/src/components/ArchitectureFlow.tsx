@@ -92,7 +92,7 @@ export function ArchitectureFlow() {
           </h2>
           <p className="text-sm text-slate-400 mt-2">
             One shared TypeScript scoring kernel (
-            <code className="text-[#7C5CFF] font-mono">@agent-gauge/core-scorer</code>) powers the{' '}
+            <code className="text-[#10F5A0] font-mono">@agent-gauge/core-scorer</code>) powers the{' '}
             <code className="text-white font-mono">skills.sh</code> multi-agent workflow, the MCP
             stdio server, the VS Code status-bar extension, and this 3D web playground.
           </p>
@@ -109,15 +109,15 @@ export function ArchitectureFlow() {
                 accentColor={item.accent}
                 maxTiltDeg={6}
                 className={`cursor-pointer p-6 flex flex-col justify-between ${
-                  isSelected ? 'ring-1 ring-[#7C5CFF]' : ''
+                  isSelected ? 'ring-1 ring-[#10F5A0]' : ''
                 }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-[#7C5CFF]/20 text-[#c4b5fd] border border-[#7C5CFF]/40">
+                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-[#10F5A0]/15 text-[#10F5A0] border border-[#10F5A0]/35">
                       <DecryptedText text={`STAGE ${item.step}`} />
                     </span>
-                    <span className="text-[11px] font-mono text-[#10F5A0]">{item.badge}</span>
+                    <span className="text-[11px] font-mono text-[#00F0FF]">{item.badge}</span>
                   </div>
                   <h3 className="text-lg font-bold text-white mb-1">{item.title}</h3>
                   <div className="text-xs font-mono text-[#00F0FF] mb-3">{item.subtitle}</div>
@@ -126,7 +126,7 @@ export function ArchitectureFlow() {
                   </p>
                 </div>
 
-                <div className="bg-[#040509]/95 border border-white/10 rounded-xl p-3.5 font-mono text-[11px] text-[#c4b5fd] overflow-x-auto">
+                <div className="bg-[#000000] border border-white/10 rounded-xl p-3.5 font-mono text-[11px] text-[#10F5A0] overflow-x-auto">
                   <pre className="leading-relaxed">{item.codeSnippet}</pre>
                 </div>
               </Tilt3DSpotlightCard>
@@ -134,29 +134,29 @@ export function ArchitectureFlow() {
           })}
         </div>
 
-        {/* 4-Channel Monorepo + UI/UX Pro Max Skill Strip */}
+        {/* 4-Channel Monorepo Strip */}
         <Tilt3DSpotlightCard
           className="arch-3d-reveal p-6"
-          accentColor="rgba(124, 92, 255, 0.25)"
+          accentColor="rgba(16, 245, 160, 0.25)"
           maxTiltDeg={3}
         >
           <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
             <div className="text-xs font-mono uppercase tracking-wider text-slate-300 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#7C5CFF]" />
-              4 Distribution Channels + UI/UX Pro Max Skill Included
+              <Layers className="w-4 h-4 text-[#10F5A0]" />
+              5 Distribution Channels · 1 Monorepo Architecture
             </div>
             <MagnetButton
               strength={0.2}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#7C5CFF]/20 border border-[#7C5CFF]/40 text-xs font-mono text-[#c4b5fd]"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#00F0FF]/15 border border-[#00F0FF]/40 text-xs font-mono text-[#00F0FF]"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#00F0FF]" />
-              GetLayers.ai Obsidian 3D Theme
+              <Sparkles className="w-3.5 h-3.5 text-[#10F5A0]" />
+              Back to Top
             </MagnetButton>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-4 rounded-xl bg-[#040509]/90 border border-white/10">
-              <div className="text-xs font-mono text-[#7C5CFF] mb-1">Channel 1 · skills.sh</div>
+            <div className="p-4 rounded-xl bg-[#000000] border border-white/10">
+              <div className="text-xs font-mono text-[#10F5A0] mb-1">Channel 1 · skills.sh</div>
               <div className="text-sm font-bold text-white mb-1">
                 Root SKILL.md Multi-Agent
               </div>
@@ -167,7 +167,7 @@ export function ArchitectureFlow() {
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#040509]/90 border border-white/10">
+            <div className="p-4 rounded-xl bg-[#000000] border border-white/10">
               <div className="text-xs font-mono text-[#10F5A0] mb-1">
                 Channel 2 · npm &amp; MCP Registry
               </div>

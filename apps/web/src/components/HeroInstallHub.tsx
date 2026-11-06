@@ -45,7 +45,7 @@ const INSTALL_CHANNELS: ChannelConfig[] = [
     badge: '1-Command Skill',
     command: 'npx skills add Agent-Gauge/agent-gauge',
     description:
-      'Installs root SKILL.md + router, calibration, ROI report, and UI/UX Pro Max subagents into Claude Code, Antigravity, Cursor, and Windsurf.',
+      'Installs root SKILL.md + router, calibration, and ROI report subagents into Claude Code, Antigravity, Cursor, and Windsurf.',
   },
   {
     id: 'cursor',
@@ -180,17 +180,17 @@ export function HeroInstallHub() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top React Bits Decrypted Badges */}
         <div className="hero-3d-stagger flex flex-wrap items-center justify-center gap-2.5 mb-7">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono bg-[#7C5CFF]/15 text-[#c4b5fd] border border-[#7C5CFF]/40 shadow-[0_0_20px_rgba(124,92,255,0.2)]">
-            <Zap className="w-3.5 h-3.5 text-[#7C5CFF]" />
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono bg-[#10F5A0]/15 text-[#10F5A0] border border-[#10F5A0]/40 shadow-[0_0_20px_rgba(16,245,160,0.25)]">
+            <Zap className="w-3.5 h-3.5 text-[#00F0FF]" />
             <DecryptedText text="<15MS DETERMINISTIC AST/GRAPH ROUTER" />
           </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono bg-[#10F5A0]/10 text-[#10F5A0] border border-[#10F5A0]/30">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/35">
             <GitBranch className="w-3.5 h-3.5" />
             Closed-Loop Git Diff Survival
           </span>
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono bg-[#00F0FF]/10 text-[#00F0FF] border border-[#00F0FF]/30">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono bg-[#10F5A0]/10 text-[#10F5A0] border border-[#10F5A0]/30">
             <Box className="w-3.5 h-3.5" />
-            GetLayers.ai 3D × React Bits × GSAP
+            Context Window Blast Shield
           </span>
         </div>
 
@@ -198,13 +198,13 @@ export function HeroInstallHub() {
         <div className="hero-3d-stagger text-center max-w-4xl mx-auto mb-12">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
             Stop burning{' '}
-            <span className="bg-gradient-to-r from-[#FF9E2C] via-amber-300 to-rose-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#00F0FF] via-cyan-200 to-[#10F5A0] bg-clip-text text-transparent">
               Opus High
             </span>{' '}
             on CSS edits.
             <br />
             Stop under-powering{' '}
-            <span className="bg-gradient-to-r from-[#7C5CFF] via-[#00F0FF] to-[#10F5A0] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#10F5A0] via-[#00F0FF] to-[#10F5A0] bg-clip-text text-transparent">
               distributed lock bugs.
             </span>
           </h1>
@@ -212,9 +212,9 @@ export function HeroInstallHub() {
             <strong className="text-white font-semibold">AgentGauge</strong> is an open-source Agent
             Skill, MCP Server, and IDE Status-Bar router that scores coding tasks across{' '}
             <span className="text-[#00F0FF]">Task Intent</span>,{' '}
-            <span className="text-[#7C5CFF]">Import-Graph Blast Radius</span>,{' '}
-            <span className="text-[#10F5A0]">AST Complexity</span>, and{' '}
-            <span className="text-[#FF9E2C]">Git Diff Survival History</span> in under 15ms.
+            <span className="text-[#10F5A0]">Import-Graph Blast Radius</span>,{' '}
+            <span className="text-[#00F0FF]">AST Complexity</span>, and{' '}
+            <span className="text-[#10F5A0]">Git Diff Survival History</span> in under 15ms.
           </p>
         </div>
 
@@ -223,21 +223,21 @@ export function HeroInstallHub() {
           {/* Left Column: 3D Tilt Install Hub */}
           <Tilt3DSpotlightCard
             className="lg:col-span-6 p-6 sm:p-7 flex flex-col justify-between"
-            accentColor="rgba(124, 92, 255, 0.32)"
+            accentColor="rgba(16, 245, 160, 0.32)"
             maxTiltDeg={5}
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-xs font-mono uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#7C5CFF]" />4 Channels · 1 Monorepo Install Hub
+                  <Sparkles className="w-3.5 h-3.5 text-[#10F5A0]" />5 Channels · 1 Monorepo Install Hub
                 </span>
-                <span className="text-xs font-mono text-[#10F5A0] bg-[#10F5A0]/10 px-2.5 py-0.5 rounded-full border border-[#10F5A0]/30">
-                  v1.0.0 · UI/UX Pro Max
+                <span className="text-xs font-mono text-[#00F0FF] bg-[#00F0FF]/10 px-2.5 py-0.5 rounded-full border border-[#00F0FF]/30">
+                  v1.0.0 · Black + Green
                 </span>
               </div>
 
               {/* Channel Selector Tabs with Magnetic Buttons */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1.5 bg-[#040509]/90 rounded-xl border border-white/10 mb-5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1.5 bg-[#000000] rounded-xl border border-[#00F0FF]/20 mb-5">
                 {INSTALL_CHANNELS.map((ch) => {
                   const active = ch.id === activeChannel;
                   return (
@@ -245,9 +245,9 @@ export function HeroInstallHub() {
                       key={ch.id}
                       strength={0.18}
                       onClick={() => setActiveChannel(ch.id)}
-                      className={`px-2.5 py-2 rounded-lg text-xs font-medium transition-all text-center ${
+                      className={`px-2.5 py-2 rounded-lg text-xs font-semibold transition-all text-center ${
                         active
-                          ? 'bg-gradient-to-r from-[#7C5CFF] to-[#5B3DF5] text-white shadow-[0_0_20px_rgba(124,92,255,0.45)]'
+                          ? 'bg-gradient-to-r from-[#10F5A0] to-[#00F0FF] text-black shadow-[0_0_20px_rgba(16,245,160,0.45)]'
                           : 'text-slate-400 hover:text-white hover:bg-white/5'
                       }`}
                     >
@@ -264,15 +264,15 @@ export function HeroInstallHub() {
 
               {/* Primary Copyable Command Box */}
               <div className="relative group mb-4">
-                <div className="flex items-center justify-between bg-[#040509] border border-white/10 group-hover:border-[#00F0FF]/50 rounded-xl px-4 py-3.5 font-mono text-xs sm:text-sm text-[#10F5A0] overflow-x-auto transition-colors">
+                <div className="flex items-center justify-between bg-[#000000] border border-[#10F5A0]/25 group-hover:border-[#00F0FF]/60 rounded-xl px-4 py-3.5 font-mono text-xs sm:text-sm text-[#10F5A0] overflow-x-auto transition-colors">
                   <div className="flex items-center gap-2.5 pr-6">
-                    <span className="text-[#7C5CFF] select-none">$</span>
+                    <span className="text-[#00F0FF] select-none font-bold">$</span>
                     <span className="whitespace-nowrap">{currentChannel.command}</span>
                   </div>
                   <MagnetButton
                     strength={0.25}
                     onClick={() => copyText(currentChannel.command, false)}
-                    className="flex items-center gap-1 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs transition-colors shrink-0"
+                    className="flex items-center gap-1 px-3 py-1 rounded-lg bg-white/10 hover:bg-[#10F5A0]/20 text-white hover:text-[#10F5A0] text-xs transition-colors shrink-0"
                   >
                     {copiedCmd ? (
                       <>
@@ -294,9 +294,9 @@ export function HeroInstallHub() {
                 <div className="mb-4">
                   <a
                     href={currentChannel.deeplinkUrl}
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#7C5CFF] via-[#5B3DF5] to-[#00F0FF] text-white font-semibold text-sm shadow-[0_0_25px_rgba(124,92,255,0.4)] hover:opacity-95 transition-all"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#10F5A0] to-[#00F0FF] text-black font-bold text-sm shadow-[0_0_25px_rgba(16,245,160,0.4)] hover:opacity-95 transition-all"
                   >
-                    <Cpu className="w-4 h-4" />
+                    <Cpu className="w-4 h-4 text-black" />
                     Open in Cursor (1-Click MCP Install Deeplink)
                     <ExternalLink className="w-3.5 h-3.5 opacity-80" />
                   </a>
@@ -334,7 +334,7 @@ export function HeroInstallHub() {
                 <ShieldCheck className="w-4 h-4 text-[#00F0FF]" />
                 IDE Status-Bar Live Pill:
               </span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#040509] border border-[#7C5CFF]/40 font-mono text-white shadow-[0_0_15px_rgba(124,92,255,0.25)]">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#000000] border border-[#00F0FF]/40 font-mono text-[#00F0FF] shadow-[0_0_15px_rgba(0,240,255,0.25)]">
                 <DecryptedText text={`⚡ Gauge: ${activeStepData.tier.toUpperCase()} · Score ${activeStepData.score}`} />
               </span>
             </div>
@@ -350,9 +350,9 @@ export function HeroInstallHub() {
               {/* Terminal Header */}
               <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-[#10F5A0]/80" />
+                  <span className="w-3 h-3 rounded-full bg-[#00F0FF]/80" />
+                  <span className="w-3 h-3 rounded-full bg-white/50" />
                   <span className="ml-2 text-xs font-mono text-slate-300 flex items-center gap-1.5">
                     <Terminal className="w-3.5 h-3.5 text-[#00F0FF]" />
                     3D Neural Router &amp; Terminal Replay
@@ -377,10 +377,10 @@ export function HeroInstallHub() {
                     key={s.id}
                     strength={0.15}
                     onClick={() => setActiveDemoStep(idx)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                       activeDemoStep === idx
-                        ? 'bg-[#7C5CFF]/25 text-white border border-[#7C5CFF] shadow-[0_0_15px_rgba(124,92,255,0.3)]'
-                        : 'text-slate-400 hover:text-white bg-[#040509]/80 border border-white/10'
+                        ? 'bg-[#10F5A0]/20 text-[#10F5A0] border border-[#10F5A0] shadow-[0_0_15px_rgba(16,245,160,0.3)]'
+                        : 'text-slate-400 hover:text-white bg-[#000000] border border-white/10'
                     }`}
                   >
                     <Play className="w-3 h-3 text-[#00F0FF]" />
@@ -390,7 +390,7 @@ export function HeroInstallHub() {
               </div>
 
               {/* Terminal Output */}
-              <div className="p-4 rounded-xl bg-[#040509]/95 border border-white/10 font-mono text-xs leading-relaxed space-y-1.5 overflow-x-auto">
+              <div className="p-4 rounded-xl bg-[#000000] border border-[#00F0FF]/20 font-mono text-xs leading-relaxed space-y-1.5 overflow-x-auto">
                 <div className="text-white font-semibold">{activeStepData.cmd}</div>
                 {activeStepData.output.map((line, i) => (
                   <div
@@ -409,21 +409,21 @@ export function HeroInstallHub() {
 
             {/* Bottom Animated Counter Strip */}
             <div className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-2 text-center">
-              <div className="p-2 rounded-lg bg-[#040509]/60 border border-white/5">
+              <div className="p-2 rounded-lg bg-[#000000] border border-white/5">
                 <div className="text-[10px] font-mono text-slate-400">ROUTING LATENCY</div>
                 <div className="text-sm font-bold font-mono text-[#10F5A0]">
                   <CountUpMetric value={1.18} decimals={2} suffix=" ms" />
                 </div>
               </div>
-              <div className="p-2 rounded-lg bg-[#040509]/60 border border-white/5">
+              <div className="p-2 rounded-lg bg-[#000000] border border-white/5">
                 <div className="text-[10px] font-mono text-slate-400">QUOTA SAVED</div>
-                <div className="text-sm font-bold font-mono text-[#7C5CFF]">
+                <div className="text-sm font-bold font-mono text-[#00F0FF]">
                   <CountUpMetric value={62.4} decimals={1} suffix="%" />
                 </div>
               </div>
-              <div className="p-2 rounded-lg bg-[#040509]/60 border border-white/5">
+              <div className="p-2 rounded-lg bg-[#000000] border border-white/5">
                 <div className="text-[10px] font-mono text-slate-400">DIFF SURVIVAL</div>
-                <div className="text-sm font-bold font-mono text-[#00F0FF]">
+                <div className="text-sm font-bold font-mono text-[#10F5A0]">
                   <CountUpMetric value={94.2} decimals={1} suffix="%" />
                 </div>
               </div>

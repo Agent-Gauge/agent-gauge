@@ -89,9 +89,9 @@ export function LivePlayground() {
       spot: 'rgba(16, 245, 160, 0.26)',
     },
     balanced: {
-      badge: 'bg-[#7C5CFF]/15 text-[#c4b5fd] border-[#7C5CFF]/40',
-      stroke: '#7C5CFF',
-      spot: 'rgba(124, 92, 255, 0.28)',
+      badge: 'bg-[#00F0FF]/15 text-[#00F0FF] border-[#00F0FF]/40',
+      stroke: '#00F0FF',
+      spot: 'rgba(0, 240, 255, 0.28)',
     },
     deep: {
       badge: 'bg-[#FF9E2C]/15 text-[#FF9E2C] border-[#FF9E2C]/40',
@@ -127,7 +127,7 @@ export function LivePlayground() {
               time.
             </p>
           </div>
-          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#040509] border border-[#7C5CFF]/40 font-mono text-xs text-white shadow-[0_0_25px_rgba(124,92,255,0.25)] shrink-0">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#000000] border border-[#00F0FF]/40 font-mono text-xs text-white shadow-[0_0_25px_rgba(0,240,255,0.25)] shrink-0">
             <span className="w-2.5 h-2.5 rounded-full bg-[#10F5A0] animate-ping" />
             <DecryptedText text={result.statusBarLabel} />
           </div>
@@ -136,7 +136,7 @@ export function LivePlayground() {
         {/* 5 Clickable 3D Preset Scenarios */}
         <div className="playground-3d-reveal mb-8">
           <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-[#7C5CFF]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#10F5A0]" />
             Click a Preset Engineering Scenario:
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
@@ -149,7 +149,7 @@ export function LivePlayground() {
                   onClick={() => applyPreset(preset)}
                   className={`text-left p-3.5 rounded-xl border transition-all flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-gradient-to-br from-[#7C5CFF]/25 to-[#00F0FF]/10 border-[#7C5CFF] text-white shadow-[0_0_25px_rgba(124,92,255,0.28)]'
+                      ? 'bg-gradient-to-br from-[#10F5A0]/25 to-[#00F0FF]/15 border-[#10F5A0] text-white shadow-[0_0_25px_rgba(16,245,160,0.3)]'
                       : 'layers-glass text-slate-300 hover:border-white/25'
                   }`}
                 >
@@ -184,7 +184,7 @@ export function LivePlayground() {
                   setPrompt(e.target.value);
                 }}
                 placeholder="Describe any coding task, bug fix, or architectural change..."
-                className="w-full rounded-xl bg-[#040509]/95 border border-white/10 focus:border-[#7C5CFF] focus:outline-none p-3.5 text-sm text-white placeholder-slate-500 font-sans leading-relaxed transition-colors"
+                className="w-full rounded-xl bg-[#000000] border border-white/10 focus:border-[#00F0FF] focus:outline-none p-3.5 text-sm text-white placeholder-slate-500 font-sans leading-relaxed transition-colors"
               />
             </div>
 
@@ -198,7 +198,7 @@ export function LivePlayground() {
                 {filePaths.map((fp) => (
                   <span
                     key={fp}
-                    className="px-2.5 py-1 rounded-md bg-[#040509] border border-white/10 font-mono text-[11px] text-slate-300"
+                    className="px-2.5 py-1 rounded-md bg-[#000000] border border-white/10 font-mono text-[11px] text-slate-300"
                   >
                     {fp}
                   </span>
@@ -209,7 +209,7 @@ export function LivePlayground() {
             {/* Interactive Sliders */}
             <div className="space-y-5 pt-3 border-t border-white/10">
               <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300">
-                <Sliders className="w-3.5 h-3.5 text-[#7C5CFF]" />
+                <Sliders className="w-3.5 h-3.5 text-[#10F5A0]" />
                 Interactive Blast Radius &amp; Repo Sliders
               </div>
 
@@ -217,10 +217,10 @@ export function LivePlayground() {
               <div>
                 <div className="flex justify-between text-xs mb-1.5">
                   <span className="text-slate-300 flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-[#7C5CFF]" />
+                    <Layers className="w-3.5 h-3.5 text-[#10F5A0]" />
                     Files Touched
                   </span>
-                  <span className="font-mono font-bold text-[#7C5CFF]">
+                  <span className="font-mono font-bold text-[#10F5A0]">
                     {filesTouched} {filesTouched === 1 ? 'file' : 'files'}
                   </span>
                 </div>
@@ -230,7 +230,7 @@ export function LivePlayground() {
                   max={25}
                   value={filesTouched}
                   onChange={(e) => setFilesTouched(Number(e.target.value))}
-                  className="w-full accent-[#7C5CFF] cursor-pointer"
+                  className="w-full accent-[#10F5A0] cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] font-mono text-slate-500">
                   <span>1 (Localized)</span>
@@ -384,25 +384,25 @@ export function LivePlayground() {
                       label: `Intent (${result.breakdown.intent.category})`,
                       score: result.breakdown.intent.score,
                       max: 35,
-                      color: 'bg-[#7C5CFF]',
+                      color: 'bg-[#00F0FF]',
                     },
                     {
                       label: `Blast (${result.breakdown.blastRadius.filesTouched}f · ${result.breakdown.blastRadius.downstreamFanOut} fan)`,
                       score: result.breakdown.blastRadius.score,
                       max: 30,
-                      color: 'bg-[#00F0FF]',
+                      color: 'bg-[#10F5A0]',
                     },
                     {
                       label: 'AST Structure',
                       score: result.breakdown.structural.score,
                       max: 20,
-                      color: 'bg-[#10F5A0]',
+                      color: 'bg-[#00F0FF]',
                     },
                     {
                       label: `Repo Risk (${historicalRevertPct}%)`,
                       score: result.breakdown.repoRisk.score,
                       max: 15,
-                      color: 'bg-[#FF9E2C]',
+                      color: 'bg-[#10F5A0]',
                     },
                   ].map((d) => (
                     <div key={d.label}>
@@ -412,7 +412,7 @@ export function LivePlayground() {
                           {d.score}/{d.max}
                         </span>
                       </div>
-                      <div className="w-full h-2 bg-[#040509] rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-[#000000] rounded-full overflow-hidden">
                         <div
                           className={`h-full ${d.color} transition-all duration-300`}
                           style={{ width: `${(d.score / d.max) * 100}%` }}
@@ -425,7 +425,7 @@ export function LivePlayground() {
 
               {/* 3 KPI Motion Cards */}
               <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="p-3 rounded-xl bg-[#040509]/90 border border-white/10">
+                <div className="p-3 rounded-xl bg-[#000000] border border-white/10">
                   <div className="text-[11px] text-slate-400 flex items-center gap-1">
                     <Coins className="w-3.5 h-3.5 text-[#10F5A0]" /> Saved vs Opus High
                   </div>
@@ -439,7 +439,7 @@ export function LivePlayground() {
                     )
                   </div>
                 </div>
-                <div className="p-3 rounded-xl bg-[#040509]/90 border border-white/10">
+                <div className="p-3 rounded-xl bg-[#000000] border border-white/10">
                   <div className="text-[11px] text-slate-400 flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-[#00F0FF]" /> Speedup Multiplier
                   </div>
@@ -451,11 +451,11 @@ export function LivePlayground() {
                     />
                   </div>
                 </div>
-                <div className="p-3 rounded-xl bg-[#040509]/90 border border-white/10">
+                <div className="p-3 rounded-xl bg-[#000000] border border-white/10">
                   <div className="text-[11px] text-slate-400 flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#7C5CFF]" /> 1st-Pass Confidence
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#10F5A0]" /> 1st-Pass Confidence
                   </div>
-                  <div className="text-base font-extrabold font-mono text-[#c4b5fd] mt-0.5">
+                  <div className="text-base font-extrabold font-mono text-[#10F5A0] mt-0.5">
                     <CountUpMetric
                       value={result.savings.winRateConfidencePct}
                       decimals={1}
@@ -469,7 +469,7 @@ export function LivePlayground() {
             {/* Bottom 3D Card: Interactive Visual Model Cost & Latency Comparison Matrix */}
             <Tilt3DSpotlightCard
               className="overflow-hidden"
-              accentColor="rgba(124, 92, 255, 0.22)"
+              accentColor="rgba(0, 240, 255, 0.22)"
               maxTiltDeg={3}
             >
               <div className="px-5 py-3.5 border-b border-white/10 flex items-center justify-between">
@@ -491,8 +491,8 @@ export function LivePlayground() {
                       key={row.modelId}
                       className={`p-3 rounded-xl border transition-all grid grid-cols-12 items-center gap-2 text-xs font-mono ${
                         row.isRecommended
-                          ? 'bg-[#7C5CFF]/15 border-[#7C5CFF]/60 text-white shadow-[0_0_20px_rgba(124,92,255,0.2)]'
-                          : 'bg-[#040509]/70 border-white/5 text-slate-300 hover:border-white/20'
+                          ? 'bg-[#00F0FF]/15 border-[#00F0FF]/60 text-white shadow-[0_0_20px_rgba(0,240,255,0.2)]'
+                          : 'bg-[#000000] border-white/5 text-slate-300 hover:border-white/20'
                       }`}
                     >
                       <div className="col-span-4 font-sans font-semibold flex items-center gap-2 truncate">
@@ -513,13 +513,13 @@ export function LivePlayground() {
                               row.tier === 'fast'
                                 ? 'bg-[#10F5A0]'
                                 : row.tier === 'balanced'
-                                  ? 'bg-[#7C5CFF]'
-                                  : 'bg-[#FF9E2C]'
+                                  ? 'bg-[#00F0FF]'
+                                  : 'bg-white'
                             }`}
                             style={{ width: `${costBarPct}%` }}
                           />
                         </div>
-                        <span className="text-[#10F5A0] w-16 text-right">
+                        <span className="text-[#10F5A0] w-16 text-right font-bold">
                           ${row.estimatedCostUsd.toFixed(4)}
                         </span>
                       </div>

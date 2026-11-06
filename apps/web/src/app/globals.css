@@ -4,9 +4,10 @@
 
 :root {
   color-scheme: dark;
-  --prism-violet: #7C5CFF;
-  --prism-cyan: #00F0FF;
   --prism-emerald: #10F5A0;
+  --prism-cyan: #00F0FF;
+  --prism-black: #020408;
+  --prism-void: #000000;
   --prism-amber: #FF9E2C;
 }
 
@@ -24,31 +25,45 @@ html.lenis body {
 }
 
 body {
-  background-color: #040509;
+  background-color: #020408;
   color: #F3F4F6;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(124, 92, 255, 0.22), transparent),
-    radial-gradient(ellipse 55% 40% at 85% 20%, rgba(0, 240, 255, 0.08), transparent),
-    linear-gradient(to bottom, rgba(25, 30, 52, 0.22) 1px, transparent 1px),
-    linear-gradient(to right, rgba(25, 30, 52, 0.22) 1px, transparent 1px);
+    radial-gradient(ellipse 80% 50% at 50% -12%, rgba(16, 245, 160, 0.18), transparent),
+    radial-gradient(ellipse 60% 45% at 85% 25%, rgba(0, 240, 255, 0.14), transparent),
+    linear-gradient(to bottom, rgba(16, 245, 160, 0.05) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
 }
 
-/* GetLayers.ai Obsidian Glass & 3D Perspective Utilities */
+/* Obsidian Glass & 3D Perspective Utilities */
 .layers-glass {
   background: linear-gradient(
     145deg,
-    rgba(16, 20, 38, 0.82) 0%,
-    rgba(9, 11, 22, 0.92) 100%
+    rgba(6, 10, 18, 0.88) 0%,
+    rgba(2, 4, 8, 0.96) 100%
   );
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 240, 255, 0.12);
   box-shadow:
-    0 24px 60px -15px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+    0 24px 60px -15px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 0 rgba(16, 245, 160, 0.18);
+}
+
+.layers-glass-green {
+  background: linear-gradient(
+    145deg,
+    rgba(4, 18, 14, 0.85) 0%,
+    rgba(2, 6, 8, 0.95) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(16, 245, 160, 0.28);
+  box-shadow:
+    0 20px 50px -10px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 0 rgba(16, 245, 160, 0.35);
 }
 
 .preserve-3d {
@@ -79,14 +94,15 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #040509;
+  background: #020408;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #191E34;
+  background: #0D1620;
   border-radius: 4px;
+  border: 1px solid rgba(16, 245, 160, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7C5CFF;
+  background: #10F5A0;
 }
