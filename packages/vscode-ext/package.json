@@ -1,0 +1,43 @@
+{
+  "name": "agent-gauge-vscode",
+  "displayName": "AgentGauge — Model & Effort Router",
+  "description": "Live status-bar task complexity scorer (<15ms) that routes coding tasks to the optimal Agent Mode + Model Tier + Effort Level (Low/Med/High).",
+  "version": "1.0.0",
+  "type": "module",
+  "publisher": "agent-gauge",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Other",
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agentGauge.scorePrompt",
+        "title": "AgentGauge: Score Coding Task & Recommend Model/Effort"
+      },
+      {
+        "command": "agentGauge.showBreakdown",
+        "title": "AgentGauge: Inspect Score Breakdown & Savings"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node --experimental-strip-types -e \"import('./src/extension.ts').then(() => console.log('agent-gauge-vscode verified'))\""
+  },
+  "dependencies": {
+    "@agent-gauge/core-scorer": "*"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.7.2"
+  },
+  "license": "MIT"
+}
