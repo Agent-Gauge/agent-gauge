@@ -4,13 +4,72 @@
 
 :root {
   color-scheme: dark;
+  --prism-violet: #7C5CFF;
+  --prism-cyan: #00F0FF;
+  --prism-emerald: #10F5A0;
+  --prism-amber: #FF9E2C;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
-  background-color: #090A0F;
+  background-color: #040509;
   color: #F3F4F6;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(124, 92, 255, 0.22), transparent),
+    radial-gradient(ellipse 55% 40% at 85% 20%, rgba(0, 240, 255, 0.08), transparent),
+    linear-gradient(to bottom, rgba(25, 30, 52, 0.22) 1px, transparent 1px),
+    linear-gradient(to right, rgba(25, 30, 52, 0.22) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* GetLayers.ai Obsidian Glass & 3D Perspective Utilities */
+.layers-glass {
+  background: linear-gradient(
+    145deg,
+    rgba(16, 20, 38, 0.82) 0%,
+    rgba(9, 11, 22, 0.92) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 24px 60px -15px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-stage {
+  perspective: 1400px;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateX(2deg);
+  }
+}
+
+.animate-float-3d {
+  animation: floatSlow 6s ease-in-out infinite;
 }
 
 /* Custom subtle scrollbars */
@@ -20,15 +79,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090A0F;
+  background: #040509;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E2231;
+  background: #191E34;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #333A52;
+  background: #7C5CFF;
 }
-

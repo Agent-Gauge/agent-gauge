@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import {
   scoreTask,
   PLAYGROUND_PRESETS,
@@ -17,7 +18,15 @@ import {
   CheckCircle2,
   Clock,
   Coins,
+  Radar,
 } from 'lucide-react';
+import {
+  Tilt3DSpotlightCard,
+  DecryptedText,
+  CountUpMetric,
+  MagnetButton,
+  InteractiveRadarVectorChart,
+} from './ReactBits3D';
 
 export function LivePlayground() {
   const [selectedPresetId, setSelectedPresetId] = useState<string>(PLAYGROUND_PRESETS[0].id);
@@ -30,6 +39,7 @@ export function LivePlayground() {
   const [historicalRevertPct, setHistoricalRevertPct] = useState<number>(
     Math.round(PLAYGROUND_PRESETS[0].historicalRevertRate * 100)
   );
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   const applyPreset = (preset: PlaygroundPreset) => {
     setSelectedPresetId(preset.id);
@@ -40,7 +50,6 @@ export function LivePlayground() {
     setHistoricalRevertPct(Math.round(preset.historicalRevertRate * 100));
   };
 
-  // Run the actual @agent-gauge/core-scorer engine synchronously in browser memory (<1ms)
   const result = useMemo(() => {
     return scoreTask({
       prompt,
@@ -51,89 +60,120 @@ export function LivePlayground() {
     });
   }, [prompt, filePaths, filesTouched, downstreamFanOut, historicalRevertPct]);
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        '.playground-3d-reveal',
+        { opacity: 0, y: 42, rotateX: 8 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.85,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 82%',
+          },
+        }
+      );
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
   const tierColors = {
     fast: {
-      badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-      stroke: '#10B981',
-      text: 'text-emerald-400',
+      badge: 'bg-[#10F5A0]/15 text-[#10F5A0] border-[#10F5A0]/40',
+      stroke: '#10F5A0',
+      spot: 'rgba(16, 245, 160, 0.26)',
     },
     balanced: {
-      badge: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
-      stroke: '#6366F1',
-      text: 'text-indigo-400',
+      badge: 'bg-[#7C5CFF]/15 text-[#c4b5fd] border-[#7C5CFF]/40',
+      stroke: '#7C5CFF',
+      spot: 'rgba(124, 92, 255, 0.28)',
     },
     deep: {
-      badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
-      stroke: '#F59E0B',
-      text: 'text-amber-400',
+      badge: 'bg-[#FF9E2C]/15 text-[#FF9E2C] border-[#FF9E2C]/40',
+      stroke: '#FF9E2C',
+      spot: 'rgba(255, 158, 44, 0.28)',
     },
   }[result.recommendedTier];
 
-  // SVG circular arc math
   const radius = 58;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (result.totalScore / 100) * circumference;
 
   return (
-    <section id="playground" className="py-16 md:py-24 border-b border-border">
+    <section
+      id="playground"
+      ref={sectionRef}
+      className="py-20 md:py-28 border-b border-border perspective-stage"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="playground-3d-reveal flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-indigo-400 mb-2">
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#00F0FF] mb-2">
               <Gauge className="w-4 h-4" />
-              Powered Live by @agent-gauge/core-scorer
+              Live Browser Kernel · @agent-gauge/core-scorer
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              Interactive Pre-Flight Router Playground
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Interactive 3D Router &amp; Vector Playground
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Click a preset scenario or type any prompt, then adjust blast-radius &amp; repo revert
-              sliders to watch the deterministic 0–100 score and model routing update in real time.
+            <p className="text-sm text-slate-400 mt-1.5 max-w-2xl">
+              Select a preset scenario or type any prompt, then drag the blast-radius &amp; repo
+              revert sliders to watch the 4-axis complexity radar and model routing morph in real
+              time.
             </p>
           </div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface border border-border font-mono text-xs text-slate-300 shrink-0">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            {result.statusBarLabel}
+          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#040509] border border-[#7C5CFF]/40 font-mono text-xs text-white shadow-[0_0_25px_rgba(124,92,255,0.25)] shrink-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#10F5A0] animate-ping" />
+            <DecryptedText text={result.statusBarLabel} />
           </div>
         </div>
 
-        {/* 5 Clickable Preset Scenarios */}
-        <div className="mb-6">
-          <div className="text-xs font-medium text-slate-400 mb-2.5 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            Preset Engineering Scenarios:
+        {/* 5 Clickable 3D Preset Scenarios */}
+        <div className="playground-3d-reveal mb-8">
+          <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#7C5CFF]" />
+            Click a Preset Engineering Scenario:
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             {PLAYGROUND_PRESETS.map((preset) => {
               const isSelected = preset.id === selectedPresetId;
               return (
-                <button
+                <MagnetButton
                   key={preset.id}
+                  strength={0.14}
                   onClick={() => applyPreset(preset)}
-                  className={`text-left p-3 rounded-xl border transition-all flex flex-col justify-between ${
+                  className={`text-left p-3.5 rounded-xl border transition-all flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-indigo-600/15 border-indigo-500 text-white shadow-md shadow-indigo-500/10'
-                      : 'bg-surface/70 border-border text-slate-300 hover:border-slate-700 hover:bg-surface'
+                      ? 'bg-gradient-to-br from-[#7C5CFF]/25 to-[#00F0FF]/10 border-[#7C5CFF] text-white shadow-[0_0_25px_rgba(124,92,255,0.28)]'
+                      : 'layers-glass text-slate-300 hover:border-white/25'
                   }`}
                 >
-                  <div className="text-xs font-semibold leading-snug mb-2">{preset.title}</div>
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <div className="text-xs font-semibold leading-snug mb-2.5">{preset.title}</div>
+                  <div className="flex items-center justify-between text-[11px] font-mono text-[#00F0FF]">
                     <span>{preset.badge}</span>
-                    <span>{preset.filesTouched}f</span>
+                    <span className="text-slate-400">{preset.filesTouched}f</span>
                   </div>
-                </button>
+                </MagnetButton>
               );
             })}
           </div>
         </div>
 
-        {/* Main Playground Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left 5 Columns: Prompt Editor + 3 Interactive Sliders */}
-          <div className="lg:col-span-5 bg-surface border border-border rounded-2xl p-6 space-y-6">
+        {/* Main Playground 3D Grid */}
+        <div className="playground-3d-reveal grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+          {/* Left 5 Columns: 3D Tilt Prompt + Interactive Sliders */}
+          <Tilt3DSpotlightCard
+            className="lg:col-span-5 p-6 space-y-6"
+            accentColor="rgba(0, 240, 255, 0.25)"
+            maxTiltDeg={4}
+          >
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#00F0FF] mb-2">
                 Task Prompt / Specification
               </label>
               <textarea
@@ -144,21 +184,21 @@ export function LivePlayground() {
                   setPrompt(e.target.value);
                 }}
                 placeholder="Describe any coding task, bug fix, or architectural change..."
-                className="w-full rounded-xl bg-[#090A0F] border border-slate-800 focus:border-indigo-500 focus:outline-none p-3.5 text-sm text-slate-100 placeholder-slate-500 font-sans leading-relaxed"
+                className="w-full rounded-xl bg-[#040509]/95 border border-white/10 focus:border-[#7C5CFF] focus:outline-none p-3.5 text-sm text-white placeholder-slate-500 font-sans leading-relaxed transition-colors"
               />
             </div>
 
             {/* Target Files Chips */}
             <div>
-              <div className="text-xs font-medium text-slate-400 mb-2 flex items-center gap-1.5">
-                <FileCode2 className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="text-xs font-mono text-slate-400 mb-2 flex items-center gap-1.5">
+                <FileCode2 className="w-3.5 h-3.5 text-[#00F0FF]" />
                 Target File Paths Inspected:
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {filePaths.map((fp) => (
                   <span
                     key={fp}
-                    className="px-2.5 py-1 rounded-md bg-[#090A0F] border border-slate-800 font-mono text-[11px] text-slate-300"
+                    className="px-2.5 py-1 rounded-md bg-[#040509] border border-white/10 font-mono text-[11px] text-slate-300"
                   >
                     {fp}
                   </span>
@@ -167,20 +207,20 @@ export function LivePlayground() {
             </div>
 
             {/* Interactive Sliders */}
-            <div className="space-y-5 pt-2 border-t border-slate-800/80">
-              <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                <Sliders className="w-3.5 h-3.5 text-indigo-400" />
-                Blast Radius &amp; Repo Calibration Sliders
+            <div className="space-y-5 pt-3 border-t border-white/10">
+              <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-slate-300">
+                <Sliders className="w-3.5 h-3.5 text-[#7C5CFF]" />
+                Interactive Blast Radius &amp; Repo Sliders
               </div>
 
-              {/* Slider 1: Files Touched (1-25) */}
+              {/* Slider 1: Files Touched */}
               <div>
                 <div className="flex justify-between text-xs mb-1.5">
                   <span className="text-slate-300 flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-indigo-400" />
+                    <Layers className="w-3.5 h-3.5 text-[#7C5CFF]" />
                     Files Touched
                   </span>
-                  <span className="font-mono font-semibold text-indigo-300">
+                  <span className="font-mono font-bold text-[#7C5CFF]">
                     {filesTouched} {filesTouched === 1 ? 'file' : 'files'}
                   </span>
                 </div>
@@ -190,23 +230,23 @@ export function LivePlayground() {
                   max={25}
                   value={filesTouched}
                   onChange={(e) => setFilesTouched(Number(e.target.value))}
-                  className="w-full accent-indigo-500 cursor-pointer"
+                  className="w-full accent-[#7C5CFF] cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>1 file (Localized)</span>
-                  <span>12 files</span>
-                  <span>25 files (Cross-Repo)</span>
+                  <span>1 (Localized)</span>
+                  <span>12</span>
+                  <span>25 (Cross-Repo)</span>
                 </div>
               </div>
 
-              {/* Slider 2: Downstream Import Fan-Out (0-100) */}
+              {/* Slider 2: Downstream Import Fan-Out */}
               <div>
                 <div className="flex justify-between text-xs mb-1.5">
                   <span className="text-slate-300 flex items-center gap-1.5">
-                    <GitFork className="w-3.5 h-3.5 text-cyan-400" />
+                    <GitFork className="w-3.5 h-3.5 text-[#00F0FF]" />
                     Downstream Import Fan-Out (DFS)
                   </span>
-                  <span className="font-mono font-semibold text-cyan-300">
+                  <span className="font-mono font-bold text-[#00F0FF]">
                     {downstreamFanOut} dependents
                   </span>
                 </div>
@@ -216,25 +256,23 @@ export function LivePlayground() {
                   max={100}
                   value={downstreamFanOut}
                   onChange={(e) => setDownstreamFanOut(Number(e.target.value))}
-                  className="w-full accent-cyan-500 cursor-pointer"
+                  className="w-full accent-[#00F0FF] cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>0 (Leaf module)</span>
+                  <span>0 (Leaf)</span>
                   <span>50</span>
-                  <span>100 (Core shared contract)</span>
+                  <span>100 (Core Contract)</span>
                 </div>
               </div>
 
-              {/* Slider 3: Historical Revert Rate (0-50%) */}
+              {/* Slider 3: Historical Revert Rate */}
               <div>
                 <div className="flex justify-between text-xs mb-1.5">
                   <span className="text-slate-300 flex items-center gap-1.5">
-                    <History className="w-3.5 h-3.5 text-amber-400" />
+                    <History className="w-3.5 h-3.5 text-[#FF9E2C]" />
                     Historical Repo Revert Rate
                   </span>
-                  <span className="font-mono font-semibold text-amber-300">
-                    {historicalRevertPct}%
-                  </span>
+                  <span className="font-mono font-bold text-[#FF9E2C]">{historicalRevertPct}%</span>
                 </div>
                 <input
                   type="range"
@@ -242,31 +280,60 @@ export function LivePlayground() {
                   max={50}
                   value={historicalRevertPct}
                   onChange={(e) => setHistoricalRevertPct(Number(e.target.value))}
-                  className="w-full accent-amber-500 cursor-pointer"
+                  className="w-full accent-[#FF9E2C] cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                  <span>0% (Stable path)</span>
+                  <span>0% (Stable)</span>
                   <span>25%</span>
-                  <span>50% (High regret hotspot)</span>
+                  <span>50% (Regret Hotspot)</span>
                 </div>
               </div>
             </div>
-          </div>
+          </Tilt3DSpotlightCard>
 
-          {/* Right 7 Columns: Live Animated Gauge + 4-Dim Breakdown + Frontier Model Comparison Table */}
+          {/* Right 7 Columns: 3D Gauge + 4-Axis Radar Vector + Model Comparison Cards */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Top Card: Score Gauge + Recommendation Banner */}
-            <div className="bg-surface border border-border rounded-2xl p-6">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                {/* Animated SVG Gauge */}
-                <div className="md:col-span-4 flex flex-col items-center justify-center">
+            {/* Top 3D Card: Radial Gauge + 4-Axis Vector Radar + Sub-Score Bars */}
+            <Tilt3DSpotlightCard
+              className="p-6"
+              accentColor={tierColors.spot}
+              maxTiltDeg={4}
+            >
+              {/* Recommendation Header Banner */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-white/10">
+                <div>
+                  <div className="text-xs font-mono text-slate-400">OPTIMAL ROUTE DECISION</div>
+                  <div className="text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2 mt-0.5">
+                    <DecryptedText text={result.primaryModel} />
+                    <span className="text-xs font-normal font-mono text-slate-400">
+                      (Alt: {result.alternateModel})
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${tierColors.badge}`}
+                  >
+                    {result.recommendedTier.toUpperCase()} ·{' '}
+                    {result.recommendedEffort.toUpperCase()}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-[#00F0FF]/15 border border-[#00F0FF]/40 font-mono text-xs text-[#00F0FF]">
+                    {result.executionMode}
+                  </span>
+                </div>
+              </div>
+
+              {/* Dual Visuals: Animated SVG Circular Gauge + 4-Axis Complexity Radar Chart */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center mb-5">
+                {/* Circular Gauge */}
+                <div className="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-xl bg-[#050711]/90 border border-white/10">
                   <div className="relative w-36 h-36 flex items-center justify-center">
                     <svg className="w-full h-full -rotate-90" viewBox="0 0 140 140">
                       <circle
                         cx="70"
                         cy="70"
                         r={radius}
-                        stroke="#1E2231"
+                        stroke="rgba(255,255,255,0.08)"
                         strokeWidth="12"
                         fill="transparent"
                       />
@@ -284,212 +351,189 @@ export function LivePlayground() {
                       />
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                      <span className="text-3xl font-extrabold font-mono text-white">
-                        {result.totalScore}
-                      </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-                        / 100 pts
+                      <CountUpMetric
+                        value={result.totalScore}
+                        decimals={0}
+                        className="text-3xl font-extrabold font-mono text-white"
+                      />
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                        SCORE / 100
                       </span>
                     </div>
                   </div>
-                  <span
-                    className={`mt-2 px-3 py-0.5 rounded-full text-xs font-mono font-semibold border ${tierColors.badge}`}
-                  >
-                    {result.recommendedTier.toUpperCase()} TIER ·{' '}
-                    {result.recommendedEffort.toUpperCase()} EFFORT
-                  </span>
                 </div>
 
-                {/* Routing Recommendation + 4 Sub-Score Progress Bars */}
-                <div className="md:col-span-8 space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800">
-                    <div>
-                      <div className="text-xs text-slate-400">Optimal Route Recommendation</div>
-                      <div className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                        {result.primaryModel}
-                        <span className="text-xs font-normal text-slate-400">
-                          (or {result.alternateModel})
-                        </span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-xs text-slate-400">Agent Execution Mode</div>
-                      <span className="inline-block px-2.5 py-0.5 rounded bg-indigo-500/15 border border-indigo-500/30 font-mono text-xs text-indigo-300">
-                        {result.executionMode}
-                      </span>
-                    </div>
+                {/* 4-Axis Radar Polygon Component */}
+                <div className="md:col-span-4">
+                  <InteractiveRadarVectorChart
+                    intentScore={result.breakdown.intent.score}
+                    blastScore={result.breakdown.blastRadius.score}
+                    structuralScore={result.breakdown.structural.score}
+                    repoRiskScore={result.breakdown.repoRisk.score}
+                  />
+                </div>
+
+                {/* 4 Dimension Animated Bars */}
+                <div className="md:col-span-4 space-y-3 text-xs">
+                  <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
+                    <Radar className="w-3.5 h-3.5 text-[#00F0FF]" />
+                    4-DIMENSION VECTOR
                   </div>
-
-                  {/* 4 Weighted Dimension Bars */}
-                  <div className="space-y-2.5 text-xs">
-                    {/* 1. Task Intent (0-35) */}
-                    <div>
+                  {[
+                    {
+                      label: `Intent (${result.breakdown.intent.category})`,
+                      score: result.breakdown.intent.score,
+                      max: 35,
+                      color: 'bg-[#7C5CFF]',
+                    },
+                    {
+                      label: `Blast (${result.breakdown.blastRadius.filesTouched}f · ${result.breakdown.blastRadius.downstreamFanOut} fan)`,
+                      score: result.breakdown.blastRadius.score,
+                      max: 30,
+                      color: 'bg-[#00F0FF]',
+                    },
+                    {
+                      label: 'AST Structure',
+                      score: result.breakdown.structural.score,
+                      max: 20,
+                      color: 'bg-[#10F5A0]',
+                    },
+                    {
+                      label: `Repo Risk (${historicalRevertPct}%)`,
+                      score: result.breakdown.repoRisk.score,
+                      max: 15,
+                      color: 'bg-[#FF9E2C]',
+                    },
+                  ].map((d) => (
+                    <div key={d.label}>
                       <div className="flex justify-between mb-1">
-                        <span className="text-slate-300 font-medium">
-                          1. Task Intent ({result.breakdown.intent.category})
-                        </span>
-                        <span className="font-mono text-indigo-300">
-                          {result.breakdown.intent.score} / 35
+                        <span className="text-slate-300 truncate pr-2">{d.label}</span>
+                        <span className="font-mono text-white font-semibold">
+                          {d.score}/{d.max}
                         </span>
                       </div>
-                      <div className="w-full h-2 bg-[#090A0F] rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-[#040509] rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-indigo-500 transition-all duration-300"
-                          style={{ width: `${(result.breakdown.intent.score / 35) * 100}%` }}
+                          className={`h-full ${d.color} transition-all duration-300`}
+                          style={{ width: `${(d.score / d.max) * 100}%` }}
                         />
                       </div>
                     </div>
+                  ))}
+                </div>
+              </div>
 
-                    {/* 2. Blast Radius (0-30) */}
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span className="text-slate-300 font-medium">
-                          2. Import-Graph Blast Radius ({result.breakdown.blastRadius.filesTouched}f,{' '}
-                          {result.breakdown.blastRadius.downstreamFanOut} fan-out)
-                        </span>
-                        <span className="font-mono text-cyan-300">
-                          {result.breakdown.blastRadius.score} / 30
-                        </span>
-                      </div>
-                      <div className="w-full h-2 bg-[#090A0F] rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-cyan-500 transition-all duration-300"
-                          style={{ width: `${(result.breakdown.blastRadius.score / 30) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* 3. Structural Complexity (0-20) */}
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span className="text-slate-300 font-medium">
-                          3. Structural / AST Complexity (
-                          {result.breakdown.structural.indicators[0] ?? 'standard'})
-                        </span>
-                        <span className="font-mono text-emerald-300">
-                          {result.breakdown.structural.score} / 20
-                        </span>
-                      </div>
-                      <div className="w-full h-2 bg-[#090A0F] rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-emerald-500 transition-all duration-300"
-                          style={{ width: `${(result.breakdown.structural.score / 20) * 100}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    {/* 4. Historical Repo Risk (0-15) */}
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span className="text-slate-300 font-medium">
-                          4. Historical Repo Risk ({historicalRevertPct}% revert rate)
-                        </span>
-                        <span className="font-mono text-amber-300">
-                          {result.breakdown.repoRisk.score} / 15
-                        </span>
-                      </div>
-                      <div className="w-full h-2 bg-[#090A0F] rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-amber-500 transition-all duration-300"
-                          style={{ width: `${(result.breakdown.repoRisk.score / 15) * 100}%` }}
-                        />
-                      </div>
-                    </div>
+              {/* 3 KPI Motion Cards */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                <div className="p-3 rounded-xl bg-[#040509]/90 border border-white/10">
+                  <div className="text-[11px] text-slate-400 flex items-center gap-1">
+                    <Coins className="w-3.5 h-3.5 text-[#10F5A0]" /> Saved vs Opus High
                   </div>
-
-                  {/* Savings Strip */}
-                  <div className="grid grid-cols-3 gap-2 pt-2">
-                    <div className="p-2.5 rounded-xl bg-[#090A0F] border border-slate-800/90">
-                      <div className="text-[11px] text-slate-400 flex items-center gap-1">
-                        <Coins className="w-3 h-3 text-emerald-400" /> Cost Saved vs Opus High
-                      </div>
-                      <div className="text-sm font-bold font-mono text-emerald-400 mt-0.5">
-                        {result.savings.costSavedPct}% (${result.savings.recommendedCostUsd})
-                      </div>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-[#090A0F] border border-slate-800/90">
-                      <div className="text-[11px] text-slate-400 flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-cyan-400" /> Speedup vs Deep High
-                      </div>
-                      <div className="text-sm font-bold font-mono text-cyan-400 mt-0.5">
-                        {result.savings.latencySpeedupMultiplier}x faster
-                      </div>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-[#090A0F] border border-slate-800/90">
-                      <div className="text-[11px] text-slate-400 flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3 text-indigo-400" /> 1st-Pass Confidence
-                      </div>
-                      <div className="text-sm font-bold font-mono text-indigo-300 mt-0.5">
-                        {result.savings.winRateConfidencePct}%
-                      </div>
-                    </div>
+                  <div className="text-base font-extrabold font-mono text-[#10F5A0] mt-0.5">
+                    <CountUpMetric value={result.savings.costSavedPct} suffix="%" /> (
+                    <CountUpMetric
+                      value={result.savings.recommendedCostUsd}
+                      decimals={4}
+                      prefix="$"
+                    />
+                    )
+                  </div>
+                </div>
+                <div className="p-3 rounded-xl bg-[#040509]/90 border border-white/10">
+                  <div className="text-[11px] text-slate-400 flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5 text-[#00F0FF]" /> Speedup Multiplier
+                  </div>
+                  <div className="text-base font-extrabold font-mono text-[#00F0FF] mt-0.5">
+                    <CountUpMetric
+                      value={result.savings.latencySpeedupMultiplier}
+                      decimals={1}
+                      suffix="x faster"
+                    />
+                  </div>
+                </div>
+                <div className="p-3 rounded-xl bg-[#040509]/90 border border-white/10">
+                  <div className="text-[11px] text-slate-400 flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#7C5CFF]" /> 1st-Pass Confidence
+                  </div>
+                  <div className="text-base font-extrabold font-mono text-[#c4b5fd] mt-0.5">
+                    <CountUpMetric
+                      value={result.savings.winRateConfidencePct}
+                      decimals={1}
+                      suffix="%"
+                    />
                   </div>
                 </div>
               </div>
-            </div>
+            </Tilt3DSpotlightCard>
 
-            {/* Bottom Card: Side-by-Side Frontier Model Cost & Effort Comparison Table */}
-            <div className="bg-surface border border-border rounded-2xl overflow-hidden">
-              <div className="px-5 py-3.5 border-b border-border flex items-center justify-between">
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                  Frontier Model Cost, Effort Multiplier &amp; Latency Comparison
+            {/* Bottom 3D Card: Interactive Visual Model Cost & Latency Comparison Matrix */}
+            <Tilt3DSpotlightCard
+              className="overflow-hidden"
+              accentColor="rgba(124, 92, 255, 0.22)"
+              maxTiltDeg={3}
+            >
+              <div className="px-5 py-3.5 border-b border-white/10 flex items-center justify-between">
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-200">
+                  Frontier Model Cost, Effort &amp; Visual Quota Matrix
                 </span>
-                <span className="text-[11px] font-mono text-slate-400">
+                <span className="text-[11px] font-mono text-[#00F0FF]">
                   18k input / 2.2k base output tokens
                 </span>
               </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr className="border-b border-slate-800 text-slate-400 font-mono text-[11px] bg-[#0B0D14]">
-                      <th className="py-2.5 px-4">Model</th>
-                      <th className="py-2.5 px-3">Tier · Effort</th>
-                      <th className="py-2.5 px-3">Est. Turn Cost</th>
-                      <th className="py-2.5 px-3">Est. Latency</th>
-                      <th className="py-2.5 px-3">Quota Units</th>
-                      <th className="py-2.5 px-4 text-right">Savings vs Opus High</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800/60 font-mono">
-                    {result.savings.comparisonTable.map((row) => (
-                      <tr
-                        key={row.modelId}
-                        className={
-                          row.isRecommended
-                            ? 'bg-indigo-500/10 text-white'
-                            : 'text-slate-300 hover:bg-slate-900/40'
-                        }
-                      >
-                        <td className="py-2.5 px-4 font-sans font-medium flex items-center gap-2">
-                          {row.isRecommended && (
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-                          )}
-                          <span>{row.modelName}</span>
-                          <span className="text-[10px] text-slate-500">{row.provider}</span>
-                        </td>
-                        <td className="py-2.5 px-3">
-                          <span className="uppercase text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-200">
-                            {row.tier} · {row.effort}
-                          </span>
-                        </td>
-                        <td className="py-2.5 px-3 text-emerald-300">
+              <div className="p-4 space-y-2">
+                {result.savings.comparisonTable.map((row) => {
+                  const costBarPct = Math.max(
+                    4,
+                    Math.min(100, (row.estimatedCostUsd / 0.75) * 100)
+                  );
+                  return (
+                    <div
+                      key={row.modelId}
+                      className={`p-3 rounded-xl border transition-all grid grid-cols-12 items-center gap-2 text-xs font-mono ${
+                        row.isRecommended
+                          ? 'bg-[#7C5CFF]/15 border-[#7C5CFF]/60 text-white shadow-[0_0_20px_rgba(124,92,255,0.2)]'
+                          : 'bg-[#040509]/70 border-white/5 text-slate-300 hover:border-white/20'
+                      }`}
+                    >
+                      <div className="col-span-4 font-sans font-semibold flex items-center gap-2 truncate">
+                        {row.isRecommended && (
+                          <span className="w-2 h-2 rounded-full bg-[#10F5A0] shrink-0" />
+                        )}
+                        <span className="truncate">{row.modelName}</span>
+                      </div>
+                      <div className="col-span-2">
+                        <span className="uppercase text-[10px] px-2 py-0.5 rounded bg-white/10 text-slate-200">
+                          {row.tier} · {row.effort}
+                        </span>
+                      </div>
+                      <div className="col-span-4 flex items-center gap-2">
+                        <div className="flex-1 h-2 bg-black/60 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full transition-all duration-500 ${
+                              row.tier === 'fast'
+                                ? 'bg-[#10F5A0]'
+                                : row.tier === 'balanced'
+                                  ? 'bg-[#7C5CFF]'
+                                  : 'bg-[#FF9E2C]'
+                            }`}
+                            style={{ width: `${costBarPct}%` }}
+                          />
+                        </div>
+                        <span className="text-[#10F5A0] w-16 text-right">
                           ${row.estimatedCostUsd.toFixed(4)}
-                        </td>
-                        <td className="py-2.5 px-3 text-slate-300">{row.estimatedLatencySec}s</td>
-                        <td className="py-2.5 px-3 text-slate-300">{row.quotaUnits}x</td>
-                        <td className="py-2.5 px-4 text-right font-semibold text-indigo-300">
-                          {row.savingsVsDeepHighPct}%
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                        </span>
+                      </div>
+                      <div className="col-span-2 text-right font-bold text-[#00F0FF]">
+                        {row.savingsVsDeepHighPct}% saved
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
+            </Tilt3DSpotlightCard>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

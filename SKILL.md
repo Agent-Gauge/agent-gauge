@@ -20,6 +20,7 @@ Depending on the phase of the coding turn, route execution to the appropriate sp
 | **1. Pre-Flight Task Triage** | [`agents/router-agent.md`](./agents/router-agent.md) | At the start of any coding task to compute the 0–100 score and select Model Tier + Effort Level + Execution Mode. | `score_task` / `npx agent-gauge score` |
 | **2. Post-Turn Git Survival Audit** | [`agents/calibration-agent.md`](./agents/calibration-agent.md) | At the start of the next turn or after a task completes to check whether edited lines survived in `git diff` or triggered a regret/escalation retry. | `audit_git_survival` & `record_turn_outcome` |
 | **3. Telemetry & ROI Reporting** | [`agents/report-agent.md`](./agents/report-agent.md) | When the user asks for token/quota savings, model win-rates, or wants to export `report.json` for the web visualizer. | `generate_roi_report` / `npx agent-gauge report --out report.json` |
+| **4. 3D UI/UX Pro Max Design** | [`agents/ui-ux-pro-max.md`](./agents/ui-ux-pro-max.md) & [`skills/ui-ux-pro-max/SKILL.md`](./skills/ui-ux-pro-max/SKILL.md) | When building or upgrading interactive 3D interfaces, GetLayers.ai themes, React Bits components, Lenis scroll, or GSAP data motion. | `apps/web/src/components/ReactBits3D.tsx` |
 
 ---
 

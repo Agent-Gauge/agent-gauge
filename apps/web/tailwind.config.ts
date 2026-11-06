@@ -9,9 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#090A0F',
-        surface: '#11131C',
-        border: '#1E2231',
+        background: '#040509',
+        surface: '#0B0E18',
+        border: '#191E34',
+        prism: {
+          violet: '#7C5CFF',
+          cyan: '#00F0FF',
+          emerald: '#10F5A0',
+          amber: '#FF9E2C',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
@@ -23,4 +29,3 @@ const config: Config = {
 };
 
 export default config;
-
