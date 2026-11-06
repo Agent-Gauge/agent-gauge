@@ -8,3 +8,4 @@ Enforce the **GetLayers.ai Obsidian Prism 3D** theme, **React Bits** interactive
 2. **3D Spatial Depth:** Interactive cards use `Tilt3DSpotlightCard` with `transform-style: preserve-3d` and cursor-tracked radial border illumination.
 3. **Lenis + GSAP Sync:** Smooth inertial scroll is active at root layout level, and data transitions animate via GSAP.
 4. **Interactive Data Components:** Every metric group uses visual motion components (animated gauges, radial survival rings, interactive radar bars, and hover-elevated comparison cards).
+

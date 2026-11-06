@@ -36,3 +36,4 @@ Every interface must feel tactile, dimensional, and alive—combining **spatial 
    - **`<Neural3DPrismCanvas>`:** Interactive 3D wireframe + particle routing topology that reacts to pointer coordinates and live task complexity scores.
 4. **Component-Driven Data Storytelling:**
    - Never dump raw numbers in plain text tables when an interactive component can express proportion, motion, and hierarchy: use **3D Radial Gauges**, **Segmented Tier Rings**, **Animated Multi-Axis Radar/Vector Bars**, and **Interactive Node-Flow Pipelines**.
+
