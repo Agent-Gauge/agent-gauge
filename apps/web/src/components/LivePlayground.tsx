@@ -127,8 +127,8 @@ export function LivePlayground() {
               time.
             </p>
           </div>
-          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#000000] border border-[#00F0FF]/40 font-mono text-xs text-white shadow-[0_0_25px_rgba(0,240,255,0.25)] shrink-0">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#10F5A0] animate-ping" />
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#000000] border border-[#00F0FF]/35 font-mono text-xs text-white shadow-[0_0_12px_rgba(0,240,255,0.12)] shrink-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#10F5A0]" />
             <DecryptedText text={result.statusBarLabel} />
           </div>
         </div>
@@ -149,8 +149,8 @@ export function LivePlayground() {
                   onClick={() => applyPreset(preset)}
                   className={`text-left p-3.5 rounded-xl border transition-all flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-gradient-to-br from-[#10F5A0]/25 to-[#00F0FF]/15 border-[#10F5A0] text-white shadow-[0_0_25px_rgba(16,245,160,0.3)]'
-                      : 'layers-glass text-slate-300 hover:border-white/25'
+                      ? 'bg-[#081814] border-[#10F5A0]/60 text-white shadow-[0_0_12px_rgba(16,245,160,0.12)]'
+                      : 'layers-glass text-slate-300 hover:border-white/20'
                   }`}
                 >
                   <div className="text-xs font-semibold leading-snug mb-2.5">{preset.title}</div>
@@ -491,7 +491,7 @@ export function LivePlayground() {
                       key={row.modelId}
                       className={`p-3 rounded-xl border transition-all grid grid-cols-12 items-center gap-2 text-xs font-mono ${
                         row.isRecommended
-                          ? 'bg-[#00F0FF]/15 border-[#00F0FF]/60 text-white shadow-[0_0_20px_rgba(0,240,255,0.2)]'
+                          ? 'bg-[#061418] border-[#00F0FF]/40 text-white shadow-[0_0_10px_rgba(0,240,255,0.1)]'
                           : 'bg-[#000000] border-white/5 text-slate-300 hover:border-white/20'
                       }`}
                     >

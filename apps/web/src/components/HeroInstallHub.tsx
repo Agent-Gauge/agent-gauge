@@ -14,6 +14,9 @@ import {
   Play,
   Sparkles,
   Box,
+  BarChart3,
+  Layers,
+  ArrowRight,
 } from 'lucide-react';
 import {
   Tilt3DSpotlightCard,
@@ -133,7 +136,15 @@ const TERMINAL_DEMO_STEPS = [
   },
 ];
 
-export function HeroInstallHub() {
+interface HeroInstallHubProps {
+  onOpenTelemetry?: () => void;
+  onOpenArchitecture?: () => void;
+}
+
+export function HeroInstallHub({
+  onOpenTelemetry,
+  onOpenArchitecture,
+}: HeroInstallHubProps = {}) {
   const [activeChannel, setActiveChannel] = useState<InstallChannel>('skills');
   const [copiedCmd, setCopiedCmd] = useState(false);
   const [copiedJson, setCopiedJson] = useState(false);
@@ -247,7 +258,7 @@ export function HeroInstallHub() {
                       onClick={() => setActiveChannel(ch.id)}
                       className={`px-2.5 py-2 rounded-lg text-xs font-semibold transition-all text-center ${
                         active
-                          ? 'bg-gradient-to-r from-[#10F5A0] to-[#00F0FF] text-black shadow-[0_0_20px_rgba(16,245,160,0.45)]'
+                          ? 'bg-[#0B1714] text-[#10F5A0] border border-[#10F5A0]/45 shadow-[0_0_10px_rgba(16,245,160,0.12)]'
                           : 'text-slate-400 hover:text-white hover:bg-white/5'
                       }`}
                     >
@@ -294,11 +305,11 @@ export function HeroInstallHub() {
                 <div className="mb-4">
                   <a
                     href={currentChannel.deeplinkUrl}
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#10F5A0] to-[#00F0FF] text-black font-bold text-sm shadow-[0_0_25px_rgba(16,245,160,0.4)] hover:opacity-95 transition-all"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#091512] hover:bg-[#0E201B] border border-[#10F5A0]/40 hover:border-[#10F5A0] text-[#10F5A0] font-semibold text-xs shadow-[0_0_12px_rgba(16,245,160,0.12)] transition-all"
                   >
-                    <Cpu className="w-4 h-4 text-black" />
-                    Open in Cursor (1-Click MCP Install Deeplink)
-                    <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                    <Cpu className="w-3.5 h-3.5 text-[#10F5A0]" />
+                    Open in Cursor (1-Click MCP Install)
+                    <ExternalLink className="w-3 h-3 opacity-70" />
                   </a>
                 </div>
               )}
@@ -379,7 +390,7 @@ export function HeroInstallHub() {
                     onClick={() => setActiveDemoStep(idx)}
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                       activeDemoStep === idx
-                        ? 'bg-[#10F5A0]/20 text-[#10F5A0] border border-[#10F5A0] shadow-[0_0_15px_rgba(16,245,160,0.3)]'
+                        ? 'bg-[#0B1714] text-[#10F5A0] border border-[#10F5A0]/50 shadow-[0_0_10px_rgba(16,245,160,0.12)]'
                         : 'text-slate-400 hover:text-white bg-[#000000] border border-white/10'
                     }`}
                   >
@@ -429,6 +440,65 @@ export function HeroInstallHub() {
               </div>
             </div>
           </Tilt3DSpotlightCard>
+        </div>
+
+        {/* 2 Slide-Out Drawer Action Triggers */}
+        <div className="hero-3d-stagger mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button
+            onClick={onOpenTelemetry}
+            className="group p-4 sm:p-5 rounded-2xl bg-[#04080D]/90 hover:bg-[#071017] border border-[#00F0FF]/25 hover:border-[#00F0FF]/60 transition-all text-left flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#08151A] border border-[#00F0FF]/30 flex items-center justify-center text-[#00F0FF] group-hover:scale-105 transition-transform">
+                <BarChart3 className="w-5 h-5 text-[#00F0FF]" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-white tracking-tight">
+                    Telemetry &amp; Quota ROI
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/30">
+                    Drawer
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Simulate enterprise quota savings, check diff survival &amp; automated calibration rules.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 text-xs font-mono text-[#00F0FF] group-hover:translate-x-1 transition-transform shrink-0 pl-2">
+              <span>Explore</span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </button>
+
+          <button
+            onClick={onOpenArchitecture}
+            className="group p-4 sm:p-5 rounded-2xl bg-[#040A08]/90 hover:bg-[#061410] border border-[#10F5A0]/25 hover:border-[#10F5A0]/60 transition-all text-left flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+          >
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#071712] border border-[#10F5A0]/30 flex items-center justify-center text-[#10F5A0] group-hover:scale-105 transition-transform">
+                <Layers className="w-5 h-5 text-[#10F5A0]" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-bold text-white tracking-tight">
+                    Architecture &amp; Blast Shield
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10F5A0]/15 text-[#10F5A0] border border-[#10F5A0]/30">
+                    Drawer
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Inspect the 5-stage AST/Graph pipeline, token caps, and PR audit action setup.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 text-xs font-mono text-[#10F5A0] group-hover:translate-x-1 transition-transform shrink-0 pl-2">
+              <span>Inspect</span>
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </button>
         </div>
       </div>
     </section>
