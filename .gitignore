@@ -9,5 +9,6 @@ out/
 .agent-gauge/
 .agents/
 skills-lock.json
+.github/
 
 

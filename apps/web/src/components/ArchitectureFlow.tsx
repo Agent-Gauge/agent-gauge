@@ -158,13 +158,12 @@ export function ArchitectureFlow() {
             <div className="p-4 rounded-xl bg-[#040509]/90 border border-white/10">
               <div className="text-xs font-mono text-[#7C5CFF] mb-1">Channel 1 · skills.sh</div>
               <div className="text-sm font-bold text-white mb-1">
-                SKILL.md + ui-ux-pro-max
+                Root SKILL.md Multi-Agent
               </div>
               <p className="text-xs text-slate-400">
-                Multi-agent skill routing across <code className="text-slate-200">router-agent</code>
-                , <code className="text-slate-200">calibration-agent</code>,{' '}
-                <code className="text-slate-200">report-agent</code>, and{' '}
-                <code className="text-[#00F0FF]">ui-ux-pro-max</code>.
+                Deterministic skill routing across <code className="text-slate-200">router-agent</code>
+                , <code className="text-slate-200">calibration-agent</code>, and{' '}
+                <code className="text-[#00F0FF]">report-agent</code>.
               </p>
             </div>
 
