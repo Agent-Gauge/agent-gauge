@@ -42,7 +42,7 @@ export default function HomePage() {
                 onClick={() => setIsTelemetryOpen(true)}
                 className="hover:text-[#00F0FF] transition-colors"
               >
-                02. Telemetry &amp; ROI
+                02. Task Telemetry
               </button>
               <button
                 onClick={() => setIsArchitectureOpen(true)}

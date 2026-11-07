@@ -42,9 +42,9 @@
    - **Empirical Revert Risk (1/15 pts):** New files have a 0% revert rate.
    - **Score: `19/100`** $\rightarrow$ **FAST Tier**.
 
-2. **Cost & Latency Routing:**
-   - Routes to **Gemini 3.1 Flash / Claude 3.5 Haiku** (LOW effort · direct mode).
-   - Routed cost: **`$0.0040`** vs **`$0.7320`** on Opus High (**99% AI quota saved**, 23.8× faster).
+2. **Model & Effort Routing:**
+   - Routes to **Gemini 3.1 Flash / Claude 3.5 Haiku** (LOW effort · direct generation mode).
+   - Instant response without burning high-effort deliberation on routine boilerplate.
 
 3. **Context Window Blast Shield Active:**
    - Enforces a strict **4,000 token prompt limit** and restricts file injection to $\le 2$ files.

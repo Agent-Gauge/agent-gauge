@@ -453,11 +453,11 @@ export function HeroInstallHub({
                 <BarChart3 className="w-5 h-5 text-[#00F0FF]" />
               </div>
               <div>
-                <span class="text-sm font-bold text-white tracking-tight">
-                  Telemetry &amp; Quota ROI
+                <span className="text-sm font-bold text-white tracking-tight">
+                  Task Telemetry &amp; Stats
                 </span>
-                <p class="text-xs text-slate-400 mt-0.5">
-                  Simulate enterprise quota savings, check diff survival &amp; automated calibration rules.
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Model distribution, routing latency benchmarks &amp; empirical diff survival rates.
                 </p>
               </div>
             </div>

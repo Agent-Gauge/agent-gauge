@@ -79,7 +79,7 @@
       <nav class="hidden md:flex items-center gap-6 text-xs font-mono text-slate-300">
         <a href="#playground" class="hover:text-[#10F5A0] transition-colors">01. Live Gauge</a>
         <button onclick="openDrawer('telemetryDrawer')" class="hover:text-[#00F0FF] transition-colors">
-          02. Telemetry &amp; ROI
+          02. Task Telemetry
         </button>
         <button onclick="openDrawer('archDrawer')" class="hover:text-[#10F5A0] transition-colors">
           03. Architecture Spec
@@ -179,8 +179,8 @@
                 📊
               </div>
               <div>
-                <span class="text-sm font-bold text-white">Telemetry &amp; Quota ROI</span>
-                <p class="text-xs text-slate-400 mt-0.5">Empirical diff survival &amp; automated calibration</p>
+                <span class="text-sm font-bold text-white">Task Telemetry &amp; Stats</span>
+                <p class="text-xs text-slate-400 mt-0.5">Model distribution, routing latency &amp; diff survival rates</p>
               </div>
             </div>
             <span class="text-xs font-mono text-[#00F0FF]">View →</span>
@@ -339,8 +339,8 @@
                 </div>
 
                 <div class="flex items-center justify-between text-xs font-mono p-2.5 rounded-lg bg-[#020509]">
-                  <span class="text-slate-400">AI Quota Saved:</span>
-                  <span class="text-[#10F5A0] font-bold text-sm" id="savedPct">98% saved vs Opus High</span>
+                  <span class="text-slate-400">Execution Mode:</span>
+                  <span class="text-[#10F5A0] font-bold text-sm" id="savedPct">Direct mode · Minimal token overhead</span>
                 </div>
               </div>
             </div>
@@ -376,7 +376,7 @@
       <div class="px-6 py-4 border-b border-white/10 bg-[#04080D]/90 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
           <span class="text-lg">📊</span>
-          <h3 class="text-base font-bold text-white">Telemetry &amp; Quota ROI</h3>
+          <h3 class="text-base font-bold text-white">Task Telemetry &amp; Stats</h3>
         </div>
         <button onclick="closeDrawer('telemetryDrawer')" class="px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300 hover:text-white transition-all">
           ✕ Close
@@ -387,12 +387,12 @@
         <!-- 4 KPI Cards -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
           <div class="p-3 rounded-xl bg-[#04080D] border border-white/10">
-            <div class="text-[10px] font-mono text-slate-400">TOTAL SAVINGS</div>
-            <div class="text-lg font-bold font-mono text-[#10F5A0]">$1,428.50</div>
+            <div class="text-[10px] font-mono text-slate-400">TASKS SCORED</div>
+            <div class="text-lg font-bold font-mono text-[#10F5A0]">1,428</div>
           </div>
           <div class="p-3 rounded-xl bg-[#04080D] border border-white/10">
-            <div class="text-[10px] font-mono text-slate-400">QUOTA SAVED</div>
-            <div class="text-lg font-bold font-mono text-[#00F0FF]">62.4%</div>
+            <div class="text-[10px] font-mono text-slate-400">AVG CONTEXT CAP</div>
+            <div class="text-lg font-bold font-mono text-[#00F0FF]">8.4k tokens</div>
           </div>
           <div class="p-3 rounded-xl bg-[#04080D] border border-white/10">
             <div class="text-[10px] font-mono text-slate-400">AVG ROUTING</div>
@@ -672,21 +672,21 @@
         recTier.textContent = 'FAST · LOW effort (direct mode)';
         recTier.className = 'text-xs font-mono text-[#10F5A0] mt-0.5';
         blastShield.textContent = 'Max 4,000 prompt tokens · Limit to ≤ 2 files';
-        savedPct.textContent = '98% saved vs Opus High';
+        savedPct.textContent = 'Direct mode · Minimal token overhead';
       } else if (total <= 68) {
         needleHub.setAttribute('fill', '#00F0FF');
         recModel.textContent = 'Claude 3.5 Sonnet / Gemini 3.1 Pro';
         recTier.textContent = 'BALANCED · MEDIUM effort (test-first)';
         recTier.className = 'text-xs font-mono text-[#00F0FF] mt-0.5';
         blastShield.textContent = 'Max 16,000 prompt tokens · Limit to ≤ 5 files';
-        savedPct.textContent = '76% saved vs Opus High';
+        savedPct.textContent = 'Test-first mode · Guarded context';
       } else {
         needleHub.setAttribute('fill', '#FF9E2C');
         recModel.textContent = 'Claude 4.6 Opus / Gemini 3.1 Pro';
         recTier.textContent = 'DEEP · HIGH effort (plan-first mode)';
         recTier.className = 'text-xs font-mono text-[#FF9E2C] mt-0.5';
         blastShield.textContent = 'Max 64,000 prompt tokens · Limit to ≤ 15 files';
-        savedPct.textContent = '22% quota optimization (Maximum Accuracy)';
+        savedPct.textContent = 'Plan-first mode · Full verification';
       }
 
       if (revert >= 20) {
