@@ -8,10 +8,10 @@
   <strong>Stop burning Opus High on CSS edits. Stop under-powering distributed lock bugs.</strong>
 </p>
 
-**AgentGauge** is an open-source, deterministic `<15ms` Agent Skill, MCP Server, VS Code Status-Bar Extension, and Next.js 15 Telemetry Visualizer that routes coding tasks to the optimal **(Agent Execution Mode + Model Tier + Effort Level: Low / Medium / High)** and learns from real **git diff survival** outcomes.
+**AgentGauge** is an open-source, deterministic `<15ms` Agent Skill, MCP Server, VS Code Status-Bar Extension, and Next.js 15 Visualizer that routes coding tasks to the optimal **(Agent Execution Mode + Model Tier + Effort Level: Low / Medium / High)** based on AST complexity and historical rollback risk.
 
 <p align="center">
-  <a href="https://agent-gauge.github.io/agent-gauge/"><strong>🚀 Launch Live Interactive Playground &amp; 3D Telemetry Demo (GitHub Pages) →</strong></a>
+  <a href="https://agent-gauge.github.io/agent-gauge/"><strong>🚀 Launch Live Interactive Playground &amp; Architecture Demo (GitHub Pages) →</strong></a>
   &nbsp;&middot;&nbsp;
   <a href="https://github.com/Agent-Gauge/agent-gauge"><code>Agent-Gauge/agent-gauge</code></a>
 </p>
@@ -61,8 +61,8 @@
 
 - **⚡ Deterministic Pre-Flight Routing (<15ms):** Scores task intent, blast radius, structural complexity, and repo risk to select the optimal model (Flash vs Sonnet vs Opus) and effort tier with **zero LLM API cost**.
 - **🛡️ Context Window Blast Shield:** Automatically calculates a recommended token & file budget (e.g. 4k tokens / 2 files on `fast` tier) to prevent amnesia and stop agents from blindly polluting context with unneeded dependency trees.
-- **⚠️ Historical Regret Sentry:** Uses empirical git diff survival telemetry from `~/.agent-gauge/telemetry.db`. If an agent touches a file where past edits were reverted (>20%), it flags a high-regret warning and enforces plan/test verification.
-- **🏷️ Automated GitHub Action PR Audit:** Analyzes pull request diffs and comments an instant AI complexity, quota savings, and regression risk badge directly on the PR.
+- **⚠️ Historical Regret Sentry:** Analyzes local git commit history. If an agent touches a file where past edits were reverted (>20%), it flags a high-regret warning and enforces plan/test verification.
+- **🏷️ Automated GitHub Action PR Audit:** Analyzes pull request diffs and comments an instant AI complexity and regression risk badge directly on the PR.
 
 ---
 
@@ -74,7 +74,7 @@
    ```
    Powered by root [`SKILL.md`](./SKILL.md) + [`agents/router-agent.md`](./agents/router-agent.md), [`agents/calibration-agent.md`](./agents/calibration-agent.md), and [`agents/report-agent.md`](./agents/report-agent.md).
 
-2. **GitHub Action PR AI Cost & Risk Badge (`action.yml`):**
+2. **GitHub Action PR Risk & Complexity Badge (`action.yml`):**
    Add this 10-line workflow to `.github/workflows/agent-gauge.yml` in **any** repo:
    ```yaml
    name: AgentGauge PR Audit
@@ -118,8 +118,8 @@
 4. **VS Code / Cursor / Antigravity / Windsurf Extension (`packages/vscode-ext`):**
    Displays a live status-bar pill (`⚡ Gauge: Sonnet · Med (Score 48)`), context shield budget, and a quick-pick 4-dimension breakdown.
 
-5. **Next.js 15 Interactive Showcase & Telemetry Visualizer (`apps/web`):**
-   Configured for **GitHub Pages** as well as Vercel. Imports `@agent-gauge/core-scorer` live in the browser for real-time scoring and includes a 100% client-side `report.json` drag-and-drop dashboard.
+5. **Next.js 15 Interactive Showcase & Architecture Visualizer (`apps/web`):**
+   Configured for **GitHub Pages** as well as Vercel. Imports `@agent-gauge/core-scorer` live in the browser for real-time scoring.
 
 ---
 

@@ -124,7 +124,6 @@ Use these reference benchmarks to calibrate task complexity ratings:
   effort: "high"
   mode: "plan-first"
   recommendedModel: "Claude 4.6 Opus"
-  costSavedVsOpusHigh: "0% (Frontier Deep Tier Warranted)"
 ```
 
 ---
@@ -154,4 +153,4 @@ Depending on the lifecycle phase, reference the dedicated subagent instruction f
 | :--- | :--- | :--- | :--- |
 | **Triage** | [`agents/router-agent.md`](./agents/router-agent.md) | Pre-flight 0–100 scoring & model selection | `score_task` / `npx agent-gauge score` |
 | **Calibration** | [`agents/calibration-agent.md`](./agents/calibration-agent.md) | Implicit git diff survival & regret detection | `audit_git_survival` & `record_turn_outcome` |
-| **ROI Report** | [`agents/report-agent.md`](./agents/report-agent.md) | Generate USD quota savings & export `report.json` | `generate_roi_report` / `npx agent-gauge report` |
+| **Report** | [`agents/report-agent.md`](./agents/report-agent.md) | Generate execution breakdown & export `report.json` | `generate_report` / `npx agent-gauge report` |
