@@ -217,29 +217,37 @@
           </p>
         </div>
 
-        <!-- 3 Quick Preset Scenario Buttons -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+        <!-- 4 Quick Preset Scenario Buttons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
           <button id="preset-1" onclick="applyPreset(1)" class="p-3.5 rounded-xl border transition-all text-left bg-[#081814] border-[#10F5A0]/50 shadow-[0_0_10px_rgba(16,245,160,0.1)]">
-            <div class="text-xs font-semibold text-white mb-1">1. CSS / UI Dark-Mode Fix</div>
+            <div class="text-xs font-semibold text-white mb-1">1. CSS / UI Dark-Mode</div>
             <div class="flex items-center justify-between text-[11px] font-mono text-[#10F5A0]">
               <span>Fast · Low</span>
-              <span class="text-slate-400">1 file touched</span>
+              <span class="text-slate-400">1 file</span>
             </div>
           </button>
 
           <button id="preset-2" onclick="applyPreset(2)" class="p-3.5 rounded-xl border transition-all text-left layers-card border-white/10 text-slate-300 hover:border-white/20">
-            <div class="text-xs font-semibold text-white mb-1">2. Auth Token Refresh Interceptor</div>
-            <div class="flex items-center justify-between text-[11px] font-mono text-[#00F0FF]">
-              <span>Balanced · Med</span>
-              <span class="text-slate-400">3 files touched</span>
+            <div class="text-xs font-semibold text-white mb-1">2. Company Policy RAG</div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-[#10F5A0]">
+              <span>Fast · 4k Shield</span>
+              <span class="text-slate-400">3 files</span>
             </div>
           </button>
 
           <button id="preset-3" onclick="applyPreset(3)" class="p-3.5 rounded-xl border transition-all text-left layers-card border-white/10 text-slate-300 hover:border-white/20">
-            <div class="text-xs font-semibold text-white mb-1">3. Postgres Billing Lock Race</div>
+            <div class="text-xs font-semibold text-white mb-1">3. Auth Interceptor</div>
+            <div class="flex items-center justify-between text-[11px] font-mono text-[#00F0FF]">
+              <span>Balanced · Med</span>
+              <span class="text-slate-400">3 files</span>
+            </div>
+          </button>
+
+          <button id="preset-4" onclick="applyPreset(4)" class="p-3.5 rounded-xl border transition-all text-left layers-card border-white/10 text-slate-300 hover:border-white/20">
+            <div class="text-xs font-semibold text-white mb-1">4. Postgres Lock Race</div>
             <div class="flex items-center justify-between text-[11px] font-mono text-[#FF9E2C]">
               <span>Deep · High</span>
-              <span class="text-slate-400">8 files · schema</span>
+              <span class="text-slate-400">8 files · lock</span>
             </div>
           </button>
         </div>
@@ -337,6 +345,22 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <!-- Real-World Example Walkthrough GIF Card -->
+        <div class="mt-10 layers-card rounded-2xl p-5 sm:p-6 text-left">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="text-base">💡</span>
+              <h3 class="text-sm font-bold text-white">Live Example: Building a Company Policy RAG Pipeline</h3>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10F5A0]/10 text-[#10F5A0] border border-[#10F5A0]/30">
+              Terminal Demo GIF
+            </span>
+          </div>
+          <div class="rounded-xl overflow-hidden border border-white/10 bg-[#020408]">
+            <img src="./rag-example.gif" alt="AgentGauge Company Policy RAG Pipeline Walkthrough" class="w-full h-auto block" />
           </div>
         </div>
 
@@ -550,12 +574,18 @@
         revert: 2
       },
       2: {
+        prompt: 'Build company policy RAG: chunk documents, generate embeddings, store in pgvector, and retrieve answers',
+        files: 3,
+        fan: 2,
+        revert: 0
+      },
+      3: {
         prompt: 'Implement token refresh interceptor with exponential backoff on 401 response',
         files: 3,
         fan: 12,
         revert: 8
       },
-      3: {
+      4: {
         prompt: 'Fix Postgres billing double-spend race condition using SELECT FOR UPDATE lock',
         files: 8,
         fan: 44,
@@ -573,7 +603,7 @@
       onFanChange();
       onRevertChange();
 
-      [1, 2, 3].forEach(num => {
+      [1, 2, 3, 4].forEach(num => {
         const card = document.getElementById('preset-' + num);
         if (num === id) {
           card.className = 'p-3.5 rounded-xl border transition-all text-left bg-[#081814] border-[#10F5A0]/50 shadow-[0_0_10px_rgba(16,245,160,0.1)]';

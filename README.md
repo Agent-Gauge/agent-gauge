@@ -27,6 +27,36 @@
 
 ---
 
+## 💡 Real-World Example: Building a Company Policy RAG Pipeline
+
+<p align="center">
+  <img src="./docs/rag-example.gif" alt="AgentGauge Company Policy RAG Example Walkthrough" width="100%" />
+</p>
+
+### What happens when you ask an agent to build a RAG system?
+
+1. **Pre-Flight Scorer Runs in `<2ms` (Zero LLM Tokens Used):**
+   - **Intent Analysis (10/35 pts):** Classifies the task as feature scaffolding.
+   - **Blast Radius (4/30 pts):** Identifies target files (`src/rag/chunker.ts`, `src/rag/embed.ts`, `src/db/vector.ts`).
+   - **Structural Complexity (4/20 pts):** Standard async document ingestion pipeline.
+   - **Empirical Revert Risk (1/15 pts):** New files have a 0% revert rate.
+   - **Score: `19/100`** $\rightarrow$ **FAST Tier**.
+
+2. **Cost & Latency Routing:**
+   - Routes to **Gemini 3.1 Flash / Claude 3.5 Haiku** (LOW effort · direct mode).
+   - Routed cost: **`$0.0040`** vs **`$0.7320`** on Opus High (**99% AI quota saved**, 23.8× faster).
+
+3. **Context Window Blast Shield Active:**
+   - Enforces a strict **4,000 token prompt limit** and restricts file injection to $\le 2$ files.
+   - Blocks the agent from dumping 85,000 tokens of company documents and unneeded dependencies into context.
+
+4. **Automatic Escalation on Concurrency Bugs:**
+   - When asked to *"Fix pgvector deadlock & memory leak during concurrent re-indexing"*, AgentGauge re-scores the task.
+   - Intent jumps to **35/35** (concurrency triage), score jumps to **`86/100`** $\rightarrow$ **DEEP Tier**.
+   - Auto-escalates to **Claude 4.6 Opus / Gemini 3.1 Pro (HIGH effort · Plan-First Mode)** with an expanded 64k token shield.
+
+---
+
 ## Key Capabilities
 
 - **⚡ Deterministic Pre-Flight Routing (<15ms):** Scores task intent, blast radius, structural complexity, and repo risk to select the optimal model (Flash vs Sonnet vs Opus) and effort tier with **zero LLM API cost**.
